@@ -5,108 +5,87 @@ import "github.com/FACorreiaa/fac-artifact/views/components"
 
 templ Stack() {
 	@layouts.Base("Stack | Fernando Correia") {
-		<div class="min-h-screen flex flex-col bg-background text-foreground">
+		<div class="min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/20 selection:text-primary">
 			@components.Navbar("stack")
-			<main class="flex-1">
-				<!-- Hero Section -->
-				<section class="py-16 bg-gradient-to-br from-primary/10 via-background to-accent/10">
-					<div class="container mx-auto max-w-4xl px-4 text-center">
-						<h1 class="text-4xl font-bold mb-4 text-foreground">Tech <span class="text-primary">Stack</span></h1>
-						<p class="text-xl text-muted-foreground">
-							Technologies and tools I use to build robust, scalable applications.
-						</p>
-					</div>
-				</section>
+			<main class="flex-1 pt-32 pb-20">
+				<!-- Header -->
+				<header class="container mx-auto max-w-6xl px-6 mb-20 text-center opacity-0 animate-fade-in-up" style="animation-delay: 0.1s;">
+					<h1 class="text-4xl md:text-6xl font-serif font-bold text-foreground mb-6">
+						The <span class="text-primary">Toolkit</span>
+					</h1>
+					<p class="text-xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
+						My weapon of choice for crafting digital experiences. A curated selection of technologies I've mastered to build robust, scalable applications.
+					</p>
+				</header>
 
-				<!-- Backend -->
-				<section class="py-16 px-4 bg-background">
-					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">⚙️</span> Backend Development
-						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("Go", "primary")
-							@techBadge("C#", "secondary")
-							@techBadge("TypeScript", "accent")
-							@techBadge("JavaScript", "default")
-							@techBadge("SQL", "default")
+				<div class="container mx-auto max-w-6xl px-6 space-y-24">
+					
+					<!-- Backend & Core -->
+					<section class="opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">
+						<div class="flex items-end gap-4 mb-10 border-b border-border/50 pb-4">
+							<span class="text-4xl">⚙️</span>
+							<h2 class="text-2xl font-serif font-bold text-foreground">Backend & Core Architecture</h2>
 						</div>
-					</div>
-				</section>
+						<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+							@techItem("Go", "Primary language for high-performance services", "bg-cyan-500/10 text-cyan-500 border-cyan-500/20")
+							@techItem("C#", "Enterprise-grade backend solutions", "bg-purple-500/10 text-purple-500 border-purple-500/20")
+							@techItem("PostgreSQL", "Relational data persistence", "bg-blue-500/10 text-blue-500 border-blue-500/20")
+							@techItem("SQL", "Database query language", "bg-blue-500/10 text-blue-500 border-blue-500/20")
+							@techItem("gRPC", "High-performance RPC framework", "bg-teal-500/10 text-teal-500 border-teal-500/20")
+							@techItem("GraphQL", "Flexible data querying", "bg-pink-500/10 text-pink-500 border-pink-500/20")
+							@techItem("Microservices", "Distributed system patterns", "bg-orange-500/10 text-orange-500 border-orange-500/20")
+							@techItem("REST", "Standard API architecture", "bg-indigo-500/10 text-indigo-500 border-indigo-500/20")
+							@techItem("Redis", "In-memory data structure store", "bg-red-500/10 text-red-500 border-red-500/20")
+							@techItem("MongoDB", "NoSQL database", "bg-green-500/10 text-green-500 border-green-500/20")
+						</div>
+					</section>
 
-				<!-- Frontend -->
-				<section class="py-16 px-4 bg-muted">
-					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">🎨</span> Frontend Development
-						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("React", "primary")
-							@techBadge("React Native", "primary")
-							@techBadge("Angular", "secondary")
-							@techBadge("Redux", "accent")
-							@techBadge("HTML", "default")
-							@techBadge("CSS", "default")
-							@techBadge("Tailwind", "default")
+					<!-- Frontend & Mobile -->
+					<section class="opacity-0 animate-fade-in-up" style="animation-delay: 0.3s;">
+						<div class="flex items-end gap-4 mb-10 border-b border-border/50 pb-4">
+							<span class="text-4xl">🎨</span>
+							<h2 class="text-2xl font-serif font-bold text-foreground">Frontend & Mobile</h2>
 						</div>
-					</div>
-				</section>
+						<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+							@techItem("React", "Component-based UI library", "bg-cyan-400/10 text-cyan-400 border-cyan-400/20")
+							@techItem("TypeScript", "Type-safe JavaScript", "bg-blue-600/10 text-blue-600 border-blue-600/20")
+							@techItem("React Native", "Cross-platform mobile apps", "bg-cyan-600/10 text-cyan-600 border-cyan-600/20")
+							@techItem("Tailwind", "Utility-first CSS framework", "bg-sky-400/10 text-sky-400 border-sky-400/20")
+							@techItem("JavaScript", "Web interaction scripting", "bg-yellow-400/10 text-yellow-400 border-yellow-400/20")
+							@techItem("HTML", "Standard markup language", "bg-orange-600/10 text-orange-600 border-orange-600/20")
+							@techItem("CSS", "Style sheet language", "bg-blue-500/10 text-blue-500 border-blue-500/20")
+							@techItem("Angular", "Web application framework", "bg-red-600/10 text-red-600 border-red-600/20")
+							@techItem("Redux", "State management", "bg-purple-600/10 text-purple-600 border-purple-600/20")
+						</div>
+					</section>
 
-				<!-- Databases -->
-				<section class="py-16 px-4 bg-background">
-					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">🗄️</span> Databases
-						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("PostgreSQL", "primary")
-							@techBadge("MSSQL", "secondary")
-							@techBadge("MongoDB", "accent")
-							@techBadge("Redis", "default")
+					<!-- Infrastructure & DevOps -->
+					<section class="opacity-0 animate-fade-in-up" style="animation-delay: 0.4s;">
+						<div class="flex items-end gap-4 mb-10 border-b border-border/50 pb-4">
+							<span class="text-4xl">🛠️</span>
+							<h2 class="text-2xl font-serif font-bold text-foreground">Infrastructure & DevOps</h2>
 						</div>
-					</div>
-				</section>
+						<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+							@techItem("Docker", "Containerization platform", "bg-blue-500/10 text-blue-500 border-blue-500/20")
+							@techItem("Kafka", "Event streaming platform", "bg-stone-500/10 text-stone-500 border-stone-500/20")
+							@techItem("Git", "Version control system", "bg-orange-500/10 text-orange-500 border-orange-500/20")
+							@techItem("CI/CD", "Continuous integration/delivery", "bg-green-500/10 text-green-500 border-green-500/20")
+							@techItem("Datadog", "Monitoring & analytics", "bg-purple-500/10 text-purple-500 border-purple-500/20")
+							@techItem("Jira", "Issue tracking", "bg-blue-600/10 text-blue-600 border-blue-600/20")
+						</div>
+					</section>
 
-				<!-- Cloud & APIs -->
-				<section class="py-16 px-4 bg-muted">
-					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">☁️</span> Cloud & APIs
-						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("REST", "primary")
-							@techBadge("gRPC", "primary")
-							@techBadge("GraphQL", "secondary")
-							@techBadge("PostgREST", "accent")
-							@techBadge("Microservices", "default")
-						</div>
-					</div>
-				</section>
-
-				<!-- DevOps & Tools -->
-				<section class="py-16 px-4 bg-background">
-					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">🛠️</span> DevOps & Tools
-						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("Docker", "primary")
-							@techBadge("Kafka", "secondary")
-							@techBadge("Datadog", "accent")
-							@techBadge("Git", "default")
-							@techBadge("Jira", "default")
-							@techBadge("CI/CD", "default")
-						</div>
-					</div>
-				</section>
+				</div>
 			</main>
 			@components.Footer()
 		</div>
 	}
 }
 
-templ techBadge(name string, variant string) {
-	<div class="card p-4 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-		<span class="font-semibold text-foreground">{ name }</span>
+templ techItem(name string, description string, classClasses string) {
+	<div class="group relative p-6 bg-card rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+		<div class={ "w-2 h-2 rounded-full absolute top-4 right-4 " + classClasses }></div>
+		<h3 class="font-bold text-lg mb-2 text-foreground group-hover:text-primary transition-colors">{ name }</h3>
+		<p class="text-xs text-muted-foreground leading-relaxed">{ description }</p>
 	</div>
 }

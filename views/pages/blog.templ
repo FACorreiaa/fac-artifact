@@ -5,27 +5,35 @@ import "github.com/FACorreiaa/fac-artifact/views/components"
 
 templ Blog() {
 	@layouts.Base("Blog | Fernando Correia") {
-		<div class="min-h-screen flex flex-col bg-background text-foreground">
+		<div class="min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/20 selection:text-primary">
 			@components.Navbar("blog")
-			<main class="flex-1">
-				<!-- Hero Section -->
-				<section class="min-h-[60vh] bg-gradient-to-br from-primary/10 via-background to-accent/10 flex items-center justify-center">
-					<div class="text-center px-4">
-						<div class="max-w-2xl mx-auto">
-							<div class="text-6xl mb-6">📝</div>
-							<h1 class="text-4xl font-bold mb-4 text-foreground">Blog</h1>
-							<p class="text-xl text-muted-foreground mb-8">
-								Coming soon! I'll be sharing thoughts on software engineering,
-								Go development, and lessons learned building scalable systems.
-							</p>
-							<div class="card p-6 max-w-md mx-auto">
-								<p class="text-foreground mb-4">Want to be notified when I publish?</p>
-								<a href="mailto:fernandocorreia316@gmail.com" class="btn btn-primary">
-									Get in Touch
-								</a>
-							</div>
-						</div>
+			<main class="flex-1 flex items-center justify-center pt-20">
+				<section class="relative px-6 text-center opacity-0 animate-fade-in-up" style="animation-delay: 0.1s;">
+					<!-- Decorative elements -->
+					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -z-10 animate-pulse"></div>
+					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-accent/10 rounded-full blur-2xl -z-10" style="animation-delay: 1s;"></div>
+					
+					<div class="mb-8 relative inline-block group cursor-default">
+						<span class="text-8xl md:text-9xl opacity-80 transition-transform duration-700 group-hover:scale-110 inline-block">✍️</span>
+						<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-4 bg-black/10 blur-xl rounded-[100%] group-hover:w-32 transition-all duration-700"></div>
 					</div>
+					
+					<h1 class="text-5xl md:text-7xl font-serif font-bold text-foreground mb-6">
+						Thoughts <span class="text-primary">&</span> Insights
+					</h1>
+					
+					<p class="text-xl md:text-2xl text-muted-foreground font-light max-w-2xl mx-auto mb-12 leading-relaxed">
+						A space for deep dives into software architecture, engineering challenges, and the future of tech.
+						<span class="block mt-4 text-primary font-medium">Coming Soon.</span>
+					</p>
+
+					<a href="mailto:fernandocorreia316@gmail.com" class="inline-flex items-center gap-2 px-8 py-3 bg-secondary/50 text-foreground rounded-full font-medium border border-border/50 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 group">
+						<span>Notify Me</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1">
+							<path d="M5 12h14"></path>
+							<path d="m12 5 7 7-7 7"></path>
+						</svg>
+					</a>
 				</section>
 			</main>
 			@components.Footer()
