@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - GO_ENV=production
+
+
+    restart: unless-stopped
+    networks:
+      - app-network
+
+
+
+  # Redis (optional - for sessions/caching)
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   restart: unless-stopped
+  #   networks:
+  #     - app-network
+
+volumes:
+
+  # redis_data:
+
+networks:
+  app-network:
+    driver: bridge
