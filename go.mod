@@ -1,9 +1,9 @@
 module github.com/FACorreiaa/fac-artifact
 
-go 1.23
+go 1.23.0
 
 require (
-	github.com/a-h/templ v0.3.819
+	github.com/a-h/templ v0.3.977
 	github.com/go-chi/chi/v5 v5.2.1
 	github.com/go-chi/cors v1.2.1
 	github.com/go-chi/httprate v0.14.1
