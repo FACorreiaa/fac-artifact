@@ -1,0 +1,66 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+
+      - name: Install Templ
+        run: go install github.com/a-h/templ/cmd/templ@latest
+
+      - name: Install Tailwind CSS
+        run: |
+          curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+          chmod +x tailwindcss-linux-x64
+          mv tailwindcss-linux-x64 tailwindcss
+
+      - name: Build application
+        run: |
+          templ generate
+          ./tailwindcss -i assets/css/index.css -o assets/css/output.css --minify
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o ./bin/server ./cmd/server
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: /var/www/fac-artifact
+        run: |
+          # Create directory if it doesn't exist
+          ssh ${SERVER_USER}@${SERVER_HOST} "mkdir -p ${DEPLOY_PATH}/assets"
+
+          # Upload binary
+          scp ./bin/server ${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/server
+
+          # Upload assets
+          rsync -avz --delete ./assets/ ${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/assets/
+
+          # Restart service
+          ssh ${SERVER_USER}@${SERVER_HOST} "systemctl restart fac-artifact"
+
+      - name: Verify deployment
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          ssh ${SERVER_USER}@${SERVER_HOST} "systemctl is-active fac-artifact"
+          echo "✅ Deployment successful!"

@@ -1,0 +1,112 @@
+package pages
+
+import "github.com/FACorreiaa/fac-artifact/views/layouts"
+import "github.com/FACorreiaa/fac-artifact/views/components"
+
+templ Stack() {
+	@layouts.Base("Stack | Fernando Correia") {
+		<div class="min-h-screen flex flex-col bg-background text-foreground">
+			@components.Navbar("stack")
+			<main class="flex-1">
+				<!-- Hero Section -->
+				<section class="py-16 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+					<div class="container mx-auto max-w-4xl px-4 text-center">
+						<h1 class="text-4xl font-bold mb-4 text-foreground">Tech <span class="text-primary">Stack</span></h1>
+						<p class="text-xl text-muted-foreground">
+							Technologies and tools I use to build robust, scalable applications.
+						</p>
+					</div>
+				</section>
+
+				<!-- Backend -->
+				<section class="py-16 px-4 bg-background">
+					<div class="container mx-auto max-w-5xl">
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="text-3xl">⚙️</span> Backend Development
+						</h2>
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+							@techBadge("Go", "primary")
+							@techBadge("C#", "secondary")
+							@techBadge("TypeScript", "accent")
+							@techBadge("JavaScript", "default")
+							@techBadge("SQL", "default")
+						</div>
+					</div>
+				</section>
+
+				<!-- Frontend -->
+				<section class="py-16 px-4 bg-muted">
+					<div class="container mx-auto max-w-5xl">
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="text-3xl">🎨</span> Frontend Development
+						</h2>
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+							@techBadge("React", "primary")
+							@techBadge("React Native", "primary")
+							@techBadge("Angular", "secondary")
+							@techBadge("Redux", "accent")
+							@techBadge("HTML", "default")
+							@techBadge("CSS", "default")
+							@techBadge("Tailwind", "default")
+						</div>
+					</div>
+				</section>
+
+				<!-- Databases -->
+				<section class="py-16 px-4 bg-background">
+					<div class="container mx-auto max-w-5xl">
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="text-3xl">🗄️</span> Databases
+						</h2>
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+							@techBadge("PostgreSQL", "primary")
+							@techBadge("MSSQL", "secondary")
+							@techBadge("MongoDB", "accent")
+							@techBadge("Redis", "default")
+						</div>
+					</div>
+				</section>
+
+				<!-- Cloud & APIs -->
+				<section class="py-16 px-4 bg-muted">
+					<div class="container mx-auto max-w-5xl">
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="text-3xl">☁️</span> Cloud & APIs
+						</h2>
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+							@techBadge("REST", "primary")
+							@techBadge("gRPC", "primary")
+							@techBadge("GraphQL", "secondary")
+							@techBadge("PostgREST", "accent")
+							@techBadge("Microservices", "default")
+						</div>
+					</div>
+				</section>
+
+				<!-- DevOps & Tools -->
+				<section class="py-16 px-4 bg-background">
+					<div class="container mx-auto max-w-5xl">
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="text-3xl">🛠️</span> DevOps & Tools
+						</h2>
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+							@techBadge("Docker", "primary")
+							@techBadge("Kafka", "secondary")
+							@techBadge("Datadog", "accent")
+							@techBadge("Git", "default")
+							@techBadge("Jira", "default")
+							@techBadge("CI/CD", "default")
+						</div>
+					</div>
+				</section>
+			</main>
+			@components.Footer()
+		</div>
+	}
+}
+
+templ techBadge(name string, variant string) {
+	<div class="card p-4 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+		<span class="font-semibold text-foreground">{ name }</span>
+	</div>
+}

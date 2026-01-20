@@ -95,9 +95,14 @@ func (s *Server) RegisterRoutes() http.Handler {
 	r.Get("/health", s.handleHealth)
 
 	// Pages
-	r.Get("/", s.handleHome)
+	r.Get("/", s.handleProjects)             // Main page is Projects
+	r.Get("/projects", s.handleProjects)     // Projects page
+	r.Get("/about", s.handleAbout)           // About Me page
+	r.Get("/curriculum", s.handleCurriculum) // Curriculum/CV page
+	r.Get("/stack", s.handleStack)           // Tech Stack page
+	r.Get("/blog", s.handleBlog)             // Blog page
 
-	// API routes (example)
+	// API routes
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/hello", s.handleAPIHello)
 	})
@@ -107,14 +112,45 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 // handleHealth returns service health status
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
-
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }
 
-// handleHome renders the home page using Templ
-func (s *Server) handleHome(w http.ResponseWriter, r *http.Request) {
-	component := pages.Index()
+// handleProjects renders the projects page (main landing page)
+func (s *Server) handleProjects(w http.ResponseWriter, r *http.Request) {
+	component := pages.Projects()
+	if err := component.Render(r.Context(), w); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+// handleAbout renders the about me page
+func (s *Server) handleAbout(w http.ResponseWriter, r *http.Request) {
+	component := pages.About()
+	if err := component.Render(r.Context(), w); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+// handleCurriculum renders the CV/curriculum page
+func (s *Server) handleCurriculum(w http.ResponseWriter, r *http.Request) {
+	component := pages.Curriculum()
+	if err := component.Render(r.Context(), w); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+// handleStack renders the tech stack page
+func (s *Server) handleStack(w http.ResponseWriter, r *http.Request) {
+	component := pages.Stack()
+	if err := component.Render(r.Context(), w); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+// handleBlog renders the blog page
+func (s *Server) handleBlog(w http.ResponseWriter, r *http.Request) {
+	component := pages.Blog()
 	if err := component.Render(r.Context(), w); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

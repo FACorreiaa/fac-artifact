@@ -132,6 +132,25 @@ lint: ## Run golangci-lint
 
 
 # =========================================================================
+# Deployment
+# =========================================================================
+
+deploy: ## Deploy to production server (Hetzner VPS)
+	@echo "🚀 Deploying to Hetzner VPS..."
+	@./deploy/deploy.sh
+
+deploy-fly: ## Deploy to Fly.io
+	@echo "🚀 Deploying to Fly.io..."
+	@fly deploy
+
+deploy-setup: ## First-time server setup instructions
+	@echo "📖 Deployment options:"
+	@echo ""
+	@echo "   🆓 Fly.io (FREE): deploy/FLY-IO.md"
+	@echo "   💰 Hetzner VPS (€4/mo): deploy/DEPLOYMENT.md"
+	@echo ""
+
+# =========================================================================
 # Docker
 # =========================================================================
 

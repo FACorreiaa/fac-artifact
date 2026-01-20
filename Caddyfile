@@ -1,0 +1,53 @@
+# Caddyfile for production deployment
+# Replace yourdomain.com with your actual domain
+
+{
+    # Global options
+    email your-email@example.com  # For Let's Encrypt notifications
+}
+
+# Production - Replace with your domain
+yourdomain.com {
+    # Reverse proxy to your Go app
+    reverse_proxy localhost:8080
+
+    # Enable compression
+    encode gzip zstd
+
+    # Security headers
+    header {
+        # Enable HSTS
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+        # Prevent clickjacking
+        X-Frame-Options "DENY"
+
+        # Prevent MIME sniffing
+        X-Content-Type-Options "nosniff"
+
+        # XSS Protection
+        X-XSS-Protection "1; mode=block"
+
+        # Referrer Policy
+        Referrer-Policy "strict-origin-when-cross-origin"
+
+        # Remove Server header
+        -Server
+    }
+
+    # Logging
+    log {
+        output file /var/log/caddy/access.log
+        format json
+    }
+
+    # Handle errors
+    handle_errors {
+        respond "{err.status_code} {err.status_text}"
+    }
+}
+
+# Development/Local (optional)
+:80 {
+    reverse_proxy localhost:8080
+}

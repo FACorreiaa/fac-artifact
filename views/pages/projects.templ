@@ -1,0 +1,86 @@
+package pages
+
+import "github.com/FACorreiaa/fac-artifact/views/layouts"
+import "github.com/FACorreiaa/fac-artifact/views/components"
+
+templ Projects() {
+	@layouts.Base("Projects | Fernando Correia") {
+		<div class="min-h-screen flex flex-col bg-background text-foreground">
+			@components.Navbar("projects")
+			<main class="flex-1">
+				<!-- Hero Section -->
+				<section class="min-h-[50vh] bg-gradient-to-br from-primary/10 via-background to-accent/10 flex items-center justify-center">
+					<div class="text-center px-4">
+						<div class="max-w-2xl mx-auto">
+							<h1 class="text-5xl font-bold mb-6 text-foreground">
+								My <span class="text-primary">Projects</span>
+							</h1>
+							<p class="text-xl mb-8 text-muted-foreground">
+								A collection of my work across backend, frontend, and mobile development.
+							</p>
+						</div>
+					</div>
+				</section>
+				<!-- Projects Grid -->
+				<section class="py-20 px-4 bg-background">
+					<div class="container mx-auto max-w-6xl">
+						<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+							@projectCard(
+								"Financial Services Platform",
+								"Modular web services for finance sector with Go, Postgres, MSSQL, and GraphQL.",
+								[]string{"Go", "GraphQL", "Postgres", "MSSQL"},
+								"https://github.com/FACorreiaa",
+							)
+							@projectCard(
+								"Network Tracking App",
+								"Web version of mobile network tracking application using React and Rust.",
+								[]string{"React", "Rust", "gRPC", "OTLP"},
+								"https://github.com/FACorreiaa",
+							)
+							@projectCard(
+								"Social Learning Platform",
+								"Cross-platform mobile and web app with React Native and TypeScript.",
+								[]string{"React Native", "TypeScript", "Go"},
+								"https://github.com/FACorreiaa",
+							)
+							@projectCard(
+								"Healthcare Systems",
+								"Web applications for pharmacy and patient management systems.",
+								[]string{"C#", "MongoDB", "Healthcare"},
+								"https://github.com/FACorreiaa",
+							)
+							@projectCard(
+								"CLI Development Tools",
+								"Golang CLI tools to streamline multi-technology projects.",
+								[]string{"Go", "CLI", "Erlang", "Rust"},
+								"https://github.com/FACorreiaa",
+							)
+							@projectCard(
+								"Blockchain Privacy Project",
+								"Privacy-focused blockchain with secure data handling.",
+								[]string{"C#", "MongoDB", "Blockchain"},
+								"https://github.com/FACorreiaa",
+							)
+						</div>
+					</div>
+				</section>
+			</main>
+			@components.Footer()
+		</div>
+	}
+}
+
+templ projectCard(title string, description string, tags []string, link string) {
+	<div class="card p-6 h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col">
+		<h3 class="text-xl font-bold text-foreground mb-3">{ title }</h3>
+		<p class="text-muted-foreground text-sm mb-4 flex-1">{ description }</p>
+		<div class="flex flex-wrap gap-2 mb-4">
+			for _, tag := range tags {
+				<span class="badge badge-outline text-xs">{ tag }</span>
+			}
+		</div>
+		<a href={ templ.SafeURL(link) } target="_blank" class="btn btn-sm btn-outline w-full">
+			View on GitHub →
+		</a>
+	</div>
+}

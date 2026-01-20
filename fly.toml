@@ -1,0 +1,39 @@
+# Fly.io deployment configuration
+# Deploy with: fly deploy
+
+app = "your-app-name"  # Change this to your desired app name
+primary_region = "fra"  # Frankfurt (change to: ams, lhr, iad, etc.)
+
+[build]
+  [build.args]
+    GO_VERSION = "1.23"
+
+[env]
+  GO_ENV = "production"
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0  # Scale to zero when idle
+  processes = ["app"]
+
+  # Health check
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "5s"
+    path = "/health"
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+# Static asset caching
+[[statics]]
+  guest_path = "/app/assets"
+  url_prefix = "/assets"
