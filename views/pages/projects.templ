@@ -9,63 +9,100 @@ templ Projects() {
 			@components.Navbar("projects")
 			<main class="flex-1">
 				<!-- Hero Section -->
-				<section class="min-h-[50vh] bg-gradient-to-br from-primary/10 via-background to-accent/10 flex items-center justify-center">
-					<div class="text-center px-4">
-						<div class="max-w-2xl mx-auto">
-							<h1 class="text-5xl font-bold mb-6 text-foreground">
-								My <span class="text-primary">Projects</span>
+				<section class="hero-section relative min-h-[65vh] bg-gradient-radial bg-dots-pattern flex items-center justify-center overflow-hidden">
+					<div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
+					<div class="relative z-10 text-center px-4 py-20">
+						<div class="max-w-5xl mx-auto">
+							<div class="animate-on-load animate-delay-1">
+								<span class="inline-block px-4 py-2 mb-6 text-xs font-mono font-bold uppercase tracking-wider bg-primary/10 border border-primary/20 rounded-full text-primary">
+									Portfolio
+								</span>
+							</div>
+							<h1 class="hero-title mb-8 text-foreground animate-on-load animate-delay-2">
+								Building Products<br/>
+								<span class="gradient-text">That Scale</span>
 							</h1>
-							<p class="text-xl mb-8 text-muted-foreground">
-								A collection of my work across backend, frontend, and mobile development.
+							<p class="hero-subtitle max-w-2xl mx-auto text-muted-foreground mb-12 animate-on-load animate-delay-3">
+								From financial platforms to mobile experiences — engineering solutions
+								that combine technical excellence with real-world impact.
 							</p>
+							<div class="flex flex-wrap gap-3 justify-center text-sm font-mono animate-on-load animate-delay-4">
+								<span class="tech-badge">Backend Engineering</span>
+								<span class="tech-badge">System Architecture</span>
+								<span class="tech-badge">Full-Stack Development</span>
+							</div>
 						</div>
 					</div>
 				</section>
-				<!-- Projects Grid -->
-				<section class="py-20 px-4 bg-background">
-					<div class="container mx-auto max-w-6xl">
+
+				<!-- Featured Projects -->
+				<section class="py-24 px-4 bg-background relative">
+					<div class="container mx-auto max-w-7xl">
+						<div class="mb-16 animate-on-load animate-delay-1">
+							<h2 class="text-4xl font-bold mb-4 text-foreground">Featured Work</h2>
+							<div class="section-divider"></div>
+						</div>
+
+						<div class="grid md:grid-cols-2 gap-8 mb-8">
+							@featuredProjectCard(
+								"Financial Services Platform",
+								"Enterprise-grade financial infrastructure built from the ground up. Handling client onboarding, transaction processing, and real-time data analytics with sub-100ms latency.",
+								[]string{"Go", "GraphQL", "PostgreSQL", "MSSQL", "CI/CD"},
+								"https://github.com/FACorreiaa",
+								"",
+								"1",
+							)
+							@featuredProjectCard(
+								"Network Tracking Application",
+								"High-performance network monitoring system processing millions of telemetry events. Built with Rust for speed and React for real-time visualization.",
+								[]string{"React", "Rust", "gRPC", "OTLP", "WebSockets"},
+								"https://github.com/FACorreiaa",
+								"",
+								"2",
+							)
+						</div>
+					</div>
+				</section>
+
+				<!-- All Projects -->
+				<section class="py-24 px-4 bg-muted/30 relative">
+					<div class="container mx-auto max-w-7xl">
+						<div class="mb-16">
+							<h2 class="text-3xl font-bold mb-4 text-foreground">More Projects</h2>
+						</div>
+
 						<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 							@projectCard(
-								"Financial Services Platform",
-								"Modular web services for finance sector with Go, Postgres, MSSQL, and GraphQL.",
-								[]string{"Go", "GraphQL", "Postgres", "MSSQL"},
-								"https://github.com/FACorreiaa",
-								"",
-							)
-							@projectCard(
-								"Network Tracking App",
-								"Web version of mobile network tracking application using React and Rust.",
-								[]string{"React", "Rust", "gRPC", "OTLP"},
-								"https://github.com/FACorreiaa",
-								"",
-							)
-							@projectCard(
 								"Social Learning Platform",
-								"Cross-platform mobile and web app with React Native and TypeScript.",
+								"Cross-platform educational app serving 50K+ users. React Native mobile app with Go backend and comprehensive backoffice.",
 								[]string{"React Native", "TypeScript", "Go"},
 								"https://github.com/FACorreiaa",
 								"",
+								"3",
 							)
 							@projectCard(
-								"Healthcare Systems",
-								"Web applications for pharmacy and patient management systems.",
-								[]string{"C#", "MongoDB", "Healthcare"},
+								"Healthcare Management System",
+								"HIPAA-compliant pharmacy and patient management platform. Streamlining healthcare workflows for medical professionals.",
+								[]string{"C#", "MongoDB", ".NET"},
 								"https://github.com/FACorreiaa",
 								"",
+								"4",
 							)
 							@projectCard(
-								"CLI Development Tools",
-								"Golang CLI tools to streamline multi-technology projects.",
+								"Developer CLI Toolkit",
+								"Suite of CLI tools for multi-language project scaffolding and automation. Supporting Go, Rust, and Erlang ecosystems.",
 								[]string{"Go", "CLI", "Erlang", "Rust"},
 								"https://github.com/FACorreiaa",
 								"",
+								"5",
 							)
 							@projectCard(
-								"Blockchain Privacy Project",
-								"Privacy-focused blockchain with secure data handling.",
-								[]string{"C#", "MongoDB", "Blockchain"},
+								"Blockchain Privacy Layer",
+								"Privacy-preserving blockchain infrastructure with zero-knowledge proofs and encrypted data storage.",
+								[]string{"C#", "MongoDB", "Cryptography"},
 								"https://github.com/FACorreiaa",
 								"",
+								"6",
 							)
 						</div>
 					</div>
@@ -76,46 +113,106 @@ templ Projects() {
 	}
 }
 
-templ projectCard(title string, description string, tags []string, githubLink string, liveLink string) {
-	<article 
-		class="card p-6 h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col"
+templ projectCard(title string, description string, tags []string, githubLink string, liveLink string, delay string) {
+	<article
+		class={ "project-card card-hover-lift card-glow p-8 h-full flex flex-col rounded-xl animate-on-load animate-delay-" + delay }
 		aria-label={ "Project: " + title }
 	>
-		<header>
-			<h3 class="text-xl font-bold text-foreground mb-3">{ title }</h3>
+		<header class="mb-4">
+			<h3 class="text-2xl font-bold text-foreground mb-3 font-display">{ title }</h3>
 		</header>
-		<p class="text-muted-foreground text-sm mb-4 flex-1">{ description }</p>
-		<nav aria-label={ "Technologies used in " + title }>
-			<ul class="flex flex-wrap gap-2 mb-4 list-none p-0" role="list">
+		<p class="text-muted-foreground leading-relaxed mb-6 flex-1">{ description }</p>
+		<nav aria-label={ "Technologies used in " + title } class="mb-6">
+			<ul class="flex flex-wrap gap-2 list-none p-0" role="list">
 				for _, tag := range tags {
 					<li>
-						<span class="badge badge-outline text-xs" aria-label={ "Technology: " + tag }>{ tag }</span>
+						<span class="inline-block px-3 py-1 text-xs font-mono font-semibold bg-primary/10 border border-primary/20 rounded-md text-primary" aria-label={ "Technology: " + tag }>
+							{ tag }
+						</span>
 					</li>
 				}
 			</ul>
 		</nav>
-		<footer class="flex flex-col gap-2 mt-auto">
-			<a 
-				href={ templ.SafeURL(githubLink) } 
-				target="_blank" 
+		<footer class="flex gap-3 mt-auto">
+			<a
+				href={ templ.SafeURL(githubLink) }
+				target="_blank"
 				rel="noopener noreferrer"
-				class="btn btn-sm btn-outline w-full"
+				class="btn btn-sm btn-outline flex-1 btn-enhanced"
 				aria-label={ "View " + title + " source code on GitHub (opens in new tab)" }
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
 					<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
 				</svg>
-				View on GitHub
+				Code
 			</a>
 			if liveLink != "" {
-				<a 
-					href={ templ.SafeURL(liveLink) } 
-					target="_blank" 
+				<a
+					href={ templ.SafeURL(liveLink) }
+					target="_blank"
 					rel="noopener noreferrer"
-					class="btn btn-sm btn-primary w-full"
+					class="btn btn-sm btn-primary flex-1 btn-enhanced"
 					aria-label={ "View " + title + " live demo (opens in new tab)" }
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+						<polyline points="15 3 21 3 21 9"></polyline>
+						<line x1="10" y1="14" x2="21" y2="3"></line>
+					</svg>
+					Live
+				</a>
+			}
+		</footer>
+	</article>
+}
+
+templ featuredProjectCard(title string, description string, tags []string, githubLink string, liveLink string, delay string) {
+	<article
+		class={ "project-card card-hover-lift p-10 h-full flex flex-col rounded-2xl bg-gradient-to-br from-card to-muted border-2 border-primary/20 animate-on-load animate-delay-" + delay }
+		aria-label={ "Featured Project: " + title }
+	>
+		<div class="mb-4">
+			<span class="inline-block px-3 py-1 text-xs font-mono font-bold uppercase tracking-wider bg-primary/20 border border-primary/30 rounded-full text-primary mb-4">
+				Featured
+			</span>
+		</div>
+		<header class="mb-4">
+			<h3 class="text-3xl font-bold text-foreground mb-4 font-display leading-tight">{ title }</h3>
+		</header>
+		<p class="text-muted-foreground text-lg leading-relaxed mb-8 flex-1">{ description }</p>
+		<nav aria-label={ "Technologies used in " + title } class="mb-8">
+			<ul class="flex flex-wrap gap-2 list-none p-0" role="list">
+				for _, tag := range tags {
+					<li>
+						<span class="inline-block px-4 py-2 text-sm font-mono font-semibold bg-primary/10 border border-primary/20 rounded-lg text-primary" aria-label={ "Technology: " + tag }>
+							{ tag }
+						</span>
+					</li>
+				}
+			</ul>
+		</nav>
+		<footer class="flex gap-4 mt-auto">
+			<a
+				href={ templ.SafeURL(githubLink) }
+				target="_blank"
+				rel="noopener noreferrer"
+				class="btn btn-outline flex-1 btn-enhanced"
+				aria-label={ "View " + title + " source code on GitHub (opens in new tab)" }
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+					<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+				</svg>
+				View Code
+			</a>
+			if liveLink != "" {
+				<a
+					href={ templ.SafeURL(liveLink) }
+					target="_blank"
+					rel="noopener noreferrer"
+					class="btn btn-primary flex-1 btn-enhanced"
+					aria-label={ "View " + title + " live demo (opens in new tab)" }
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
 						<polyline points="15 3 21 3 21 9"></polyline>
 						<line x1="10" y1="14" x2="21" y2="3"></line>

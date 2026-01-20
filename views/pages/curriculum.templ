@@ -9,15 +9,30 @@ templ Curriculum() {
 			@components.Navbar("curriculum")
 			<main class="flex-1">
 				<!-- Header -->
-				<section class="py-16 bg-gradient-to-br from-primary/10 via-background to-accent/10">
-					<div class="container mx-auto max-w-4xl px-4 text-center">
-						<h1 class="text-4xl font-bold mb-4 text-foreground">Fernando Correia</h1>
-						<p class="text-xl text-primary mb-4">Software Engineer</p>
-						<div class="flex flex-wrap justify-center gap-4 text-muted-foreground">
-							<span>📞 +351 937042328</span>
-							<span>✉️ fernandocorreia316@gmail.com</span>
-							<a href="https://github.com/FACorreiaa" target="_blank" class="text-primary hover:underline">
-								🔗 GitHub
+				<section class="hero-section relative py-20 bg-gradient-radial bg-dots-pattern overflow-hidden">
+					<div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
+					<div class="container mx-auto max-w-5xl px-4 text-center relative z-10">
+						<div class="animate-on-load animate-delay-1">
+							<span class="inline-block px-4 py-2 mb-6 text-xs font-mono font-bold uppercase tracking-wider bg-primary/10 border border-primary/20 rounded-full text-primary">
+								Resume
+							</span>
+						</div>
+						<h1 class="text-5xl font-bold mb-6 text-foreground font-display animate-on-load animate-delay-2">
+							<span class="gradient-text">Fernando Correia</span>
+						</h1>
+						<p class="text-2xl text-primary font-semibold mb-8 animate-on-load animate-delay-3">Software Engineer & Tech Entrepreneur</p>
+						<div class="flex flex-wrap justify-center gap-6 text-muted-foreground animate-on-load animate-delay-4">
+							<a href="tel:+351937042328" class="flex items-center gap-2 hover:text-primary transition-colors">
+								<span class="text-lg">📞</span>
+								<span class="font-mono text-sm">+351 937042328</span>
+							</a>
+							<a href="mailto:fernandocorreia316@gmail.com" class="flex items-center gap-2 hover:text-primary transition-colors">
+								<span class="text-lg">✉️</span>
+								<span class="font-mono text-sm">fernandocorreia316@gmail.com</span>
+							</a>
+							<a href="https://github.com/FACorreiaa" target="_blank" class="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+								<span class="text-lg">🔗</span>
+								<span class="font-mono text-sm">github.com/FACorreiaa</span>
 							</a>
 						</div>
 					</div>
