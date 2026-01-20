@@ -40,7 +40,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	// Secure Headers (HSTS, SSL Redirect, CSP, etc)
 	secureMiddleware := secure.New(secure.Options{
-		AllowedHosts:          []string{"localhost", "127.0.0.1"},
+		AllowedHosts:          []string{}, // Empty in dev to allow any localhost port
 		AllowedHostsAreRegex:  false,
 		HostsProxyHeaders:     []string{"X-Forwarded-Host"},
 		SSLRedirect:           false, // Set to true in production with HTTPS
@@ -115,7 +115,9 @@ func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 // handleHome renders the home page using Templ
 func (s *Server) handleHome(w http.ResponseWriter, r *http.Request) {
 	component := pages.Index()
-	component.Render(r.Context(), w)
+	if err := component.Render(r.Context(), w); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 // handleAPIHello is a sample JSON API endpoint

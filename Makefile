@@ -30,7 +30,7 @@ setup: ## Install all development tools
 	@echo "📥 Installing Tailwind CSS + Basecoat..."
 	@mkdir -p assets/css assets/js
 	@cd assets && curl -sL daisyui.com/fast | bash
-	@mv assets/tailwindcss ./tailwindcss 2>/dev/null || true
+	@mv assets/tailwindcss tailwindcss 2>/dev/null || true
 	@echo "Downloading Basecoat CSS..."
 	@curl -sL -o assets/css/basecoat.min.css https://cdn.jsdelivr.net/npm/basecoat-css@latest/dist/basecoat.min.css
 	@echo "Creating assets/css/index.css..."
@@ -55,7 +55,7 @@ ci-setup: ## Setup for CI environments
 	@echo "📥 Installing Tailwind CSS + Basecoat..."
 	@mkdir -p assets/css assets/js
 	@cd assets && curl -sL daisyui.com/fast | bash
-	@mv assets/tailwindcss ./tailwindcss 2>/dev/null || true
+	@mv assets/tailwindcss tailwindcss 2>/dev/null || true
 	@echo "Downloading Basecoat CSS..."
 	@curl -sL -o assets/css/basecoat.min.css https://cdn.jsdelivr.net/npm/basecoat-css@latest/dist/basecoat.min.css
 	@echo "Creating assets/css/index.css..."
@@ -72,21 +72,27 @@ ci-setup: ## Setup for CI environments
 # Development
 # =========================================================================
 
-dev: ## Start development server with live reload
-	@echo "🚀 Starting development server..."
-	@make dev-air
-
-dev-air:
+dev: ## Start development server with live reload (using Air)
+	@echo "🚀 Starting development server with Air..."
 	@GO_ENV=development air
 
-dev-tailwind:
-	@echo "CSS watching handled by Air"
+dev-templ: ## Start development with Templ proxy (auto browser refresh)
+	@echo "🚀 Starting with Templ proxy..."
+	@echo "📡 Access via: http://127.0.0.1:7331 (auto-refresh enabled)"
+	@echo "📡 Direct access: http://localhost:8080 (manual refresh needed)"
+	@GO_ENV=development make -j2 dev-templ-watch dev-tailwind-watch
 
-templ: ## Generate Templ templates
+dev-templ-watch:
+	@templ generate --watch --proxy="http://localhost:8080" --cmd="go run ./cmd/server"
+
+dev-tailwind-watch:
+	@sleep 2 && tailwindcss -i ./assets/css/index.css -o ./assets/css/output.css --watch
+
+templ: ## Generate Templ templates once
 	templ generate
 
 css: ## Build CSS once
-	@./tailwindcss -i assets/css/index.css -o assets/css/output.css
+	@tailwindcss -i assets/css/index.css -o assets/css/output.css
 
 # =========================================================================
 # Build
@@ -94,7 +100,7 @@ css: ## Build CSS once
 
 build: templ ## Build production binary
 	@echo "🔨 Building CSS..."
-	@./tailwindcss -i assets/css/index.css -o assets/css/output.css --minify
+	@tailwindcss -i assets/css/index.css -o assets/css/output.css --minify
 	@echo "🔨 Building binary..."
 	CGO_ENABLED=0 go build -ldflags="-s -w" -o ./bin/$(BINARY_NAME) ./cmd/server
 	@echo "✅ Build complete: ./bin/$(BINARY_NAME)"
