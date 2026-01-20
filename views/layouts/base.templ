@@ -2,11 +2,33 @@ package layouts
 
 templ Base(title string) {
 	<!DOCTYPE html>
-	<html lang="en" class="dark">
+	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>{ title }</title>
+			<!-- Theme initialization (must be before CSS) -->
+			<script>
+				(function() {
+					const savedTheme = localStorage.getItem('theme');
+					if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+						document.documentElement.classList.add('dark');
+					}
+				})();
+				
+				// Theme toggle function (global)
+				function toggleTheme() {
+					const html = document.documentElement;
+					const isDark = html.classList.contains('dark');
+					if (isDark) {
+						html.classList.remove('dark');
+						localStorage.setItem('theme', 'light');
+					} else {
+						html.classList.add('dark');
+						localStorage.setItem('theme', 'dark');
+					}
+				}
+			</script>
 			<!-- SEO Meta Tags -->
 			<meta name="description" content="Skillsphere - Professional skill tracking platform"/>
 			<meta name="author" content="Skillsphere"/>

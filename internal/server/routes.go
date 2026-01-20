@@ -39,6 +39,13 @@ func (s *Server) RegisterRoutes() http.Handler {
 	// ──────────────────────────────────────────────────────────────────
 
 	// Secure Headers (HSTS, SSL Redirect, CSP, etc)
+	// In development mode, use more permissive CSP for templ proxy compatibility
+	csp := "default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://unpkg.com;"
+	if os.Getenv("GO_ENV") == "development" {
+		// Allow templ proxy and localhost connections in development
+		csp = "default-src 'self' http://localhost:* http://127.0.0.1:*; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com http://localhost:* http://127.0.0.1:*;"
+	}
+
 	secureMiddleware := secure.New(secure.Options{
 		AllowedHosts:          []string{}, // Empty in dev to allow any localhost port
 		AllowedHostsAreRegex:  false,
@@ -52,7 +59,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 		FrameDeny:             true,
 		ContentTypeNosniff:    true,
 		BrowserXssFilter:      true,
-		ContentSecurityPolicy: "default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://unpkg.com;",
+		ContentSecurityPolicy: csp,
 		ReferrerPolicy:        "strict-origin-when-cross-origin",
 	})
 	r.Use(func(next http.Handler) http.Handler {

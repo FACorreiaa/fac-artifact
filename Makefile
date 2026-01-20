@@ -83,7 +83,7 @@ dev-templ: ## Start development with Templ proxy (auto browser refresh)
 	@GO_ENV=development make -j2 dev-templ-watch dev-tailwind-watch
 
 dev-templ-watch:
-	@templ generate --watch --proxy="http://localhost:8080" --cmd="go run ./cmd/server"
+	@templ generate && templ generate --watch --proxy="http://localhost:8080" --cmd="go run ./cmd/server"
 
 dev-tailwind-watch:
 	@sleep 2 && tailwindcss -i ./assets/css/index.css -o ./assets/css/output.css --watch
