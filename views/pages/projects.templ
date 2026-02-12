@@ -4,42 +4,82 @@ import "github.com/FACorreiaa/fac-artifact/views/layouts"
 import "github.com/FACorreiaa/fac-artifact/views/components"
 
 templ Projects() {
-	@layouts.Base("Projects | Fernando Correia") {
+	@layouts.Base("Projects | FC Software Studio") {
 		<div class="min-h-screen flex flex-col bg-background text-foreground">
 			@components.Navbar("projects")
 			<main class="flex-1">
 				<!-- Hero Section -->
-				<section class="hero-gradient min-h-[50vh] flex items-center justify-center py-20">
+				<section class="hero-gradient min-h-[55vh] flex items-center justify-center py-24">
 					<div class="text-center px-4 animate-fade-in-up">
 						<div class="max-w-3xl mx-auto">
-							<span class="category-label block mb-4 animate-fade-in delay-100">Web Apps • iOS Apps • Company Services</span>
-							<h1 class="text-5xl md:text-6xl font-bold mb-6 text-foreground animate-fade-in-up delay-200">
-								Build and Scale <span class="text-gradient">Revenue-Ready Apps</span>
+							<!-- Announcement Badge -->
+							<div class="mb-6 animate-fade-in delay-100">
+								<span class="announcement-badge">
+									<span>🚀</span>
+									Now accepting new projects
+								</span>
+							</div>
+							<span class="category-label block mb-4 animate-fade-in delay-200">Web Apps • iOS Apps • Product Engineering</span>
+							<h1 class="text-5xl md:text-7xl font-bold mb-6 text-foreground animate-fade-in-up delay-300">
+								Build & Ship <span class="text-gradient">Premium Apps</span>
 							</h1>
-							<p class="text-xl mb-8 text-muted-foreground max-w-2xl mx-auto animate-fade-in-up delay-300">
-								I run a product-focused software company delivering polished web apps, high-performance iOS apps,
+							<p class="text-xl mb-10 text-muted-foreground max-w-2xl mx-auto animate-fade-in-up delay-400">
+								I run a product-focused software studio delivering polished web apps, high-performance iOS apps,
 								and custom engineering services for teams that want to move fast and grow.
 							</p>
-							<div class="flex flex-wrap gap-3 justify-center animate-fade-in-up delay-400">
-								<a href="/book-call" class="btn btn-primary btn-glow">Book a Call</a>
+							<div class="flex flex-wrap gap-3 justify-center animate-fade-in-up delay-500">
+								<a href="/book-call" class="btn btn-primary btn-glow btn-attention">Book a Call</a>
 								<a href="/proposal" class="btn btn-outline">Request Proposal</a>
-								<a href="#projects" class="btn btn-outline">App Showcase</a>
+								<a href="#projects" class="btn btn-outline">App Showcase ↓</a>
 							</div>
-							<p class="text-sm mt-5 text-muted-foreground animate-fade-in-up delay-500">Discovery-first collaboration, clear scope, and delivery you can ship with confidence.</p>
 						</div>
 					</div>
 				</section>
-
+				<!-- Trust / Social Proof Bar -->
+				<section class="py-8 px-4 bg-background" data-reveal>
+					<div class="container mx-auto max-w-4xl">
+						<div class="trust-bar">
+							<div class="trust-item">
+								<div class="trust-item-icon">🌍</div>
+								<div>
+									<div class="trust-item-value">4+</div>
+									<div class="text-xs text-muted-foreground">Countries</div>
+								</div>
+							</div>
+							<div class="trust-item">
+								<div class="trust-item-icon">🚀</div>
+								<div>
+									<div class="trust-item-value">15+</div>
+									<div class="text-xs text-muted-foreground">Projects Delivered</div>
+								</div>
+							</div>
+							<div class="trust-item">
+								<div class="trust-item-icon">⚡</div>
+								<div>
+									<div class="trust-item-value">7+</div>
+									<div class="text-xs text-muted-foreground">Years Experience</div>
+								</div>
+							</div>
+							<div class="trust-item">
+								<div class="trust-item-icon">🛡️</div>
+								<div>
+									<div class="trust-item-value">10+</div>
+									<div class="text-xs text-muted-foreground">Technologies</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 				<!-- Projects Grid -->
 				<section id="projects" class="py-24 px-4 bg-background pattern-dots">
 					<div class="container mx-auto max-w-6xl">
-						<div class="text-center mb-16 animate-fade-in-up">
+						<div class="text-center mb-16" data-reveal>
 							<h2 class="section-heading text-3xl font-bold text-foreground inline-block">Featured Work</h2>
 							<p class="text-muted-foreground mt-4 max-w-xl mx-auto">
 								A selection of projects showcasing expertise across backend, frontend, and mobile development.
 							</p>
 						</div>
-						<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+						<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-reveal-stagger>
 							@projectCard(
 								"Financial Services Platform",
 								"Modular web services for finance sector with Go, Postgres, MSSQL, and GraphQL. Built scalable APIs for financial data processing.",
@@ -48,6 +88,7 @@ templ Projects() {
 								"https://github.com/FACorreiaa",
 								"",
 								true,
+								"⚙️",
 							)
 							@projectCard(
 								"Network Tracking App",
@@ -57,6 +98,7 @@ templ Projects() {
 								"https://github.com/FACorreiaa",
 								"",
 								false,
+								"📡",
 							)
 							@projectCard(
 								"Social Learning Platform",
@@ -66,6 +108,7 @@ templ Projects() {
 								"https://github.com/FACorreiaa",
 								"",
 								true,
+								"📱",
 							)
 							@projectCard(
 								"Healthcare Systems",
@@ -75,6 +118,7 @@ templ Projects() {
 								"https://github.com/FACorreiaa",
 								"",
 								false,
+								"🏥",
 							)
 							@projectCard(
 								"CLI Development Tools",
@@ -84,6 +128,7 @@ templ Projects() {
 								"https://github.com/FACorreiaa",
 								"",
 								false,
+								"🛠️",
 							)
 							@projectCard(
 								"Blockchain Privacy Project",
@@ -93,21 +138,21 @@ templ Projects() {
 								"https://github.com/FACorreiaa",
 								"",
 								false,
+								"🔐",
 							)
 						</div>
 					</div>
 				</section>
-
 				<!-- CTA Section -->
-				<section class="py-20 px-4 bg-muted">
+				<section class="py-20 px-4 bg-muted" data-reveal="scale">
 					<div class="container mx-auto max-w-4xl text-center">
-						<div class="glass-card p-12 rounded-2xl">
-							<h2 class="text-3xl font-bold mb-4 text-foreground">Need a Web or iOS Product Partner?</h2>
-							<p class="text-muted-foreground mb-8 max-w-xl mx-auto">
+						<div class="glass-card p-12 rounded-2xl border-gradient">
+							<h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Need a Web or iOS Product Partner?</h2>
+							<p class="text-muted-foreground mb-8 max-w-xl mx-auto text-lg">
 								From MVPs to production scaling, I help companies plan, build, and ship customer-facing products with reliable engineering execution.
 							</p>
 							<div class="flex gap-4 justify-center flex-wrap">
-								<a href="/book-call" class="btn btn-primary btn-glow">Book a Call</a>
+								<a href="/book-call" class="btn btn-primary btn-glow btn-attention">Book a Call</a>
 								<a href="/proposal" class="btn btn-outline">Request Proposal</a>
 							</div>
 						</div>
@@ -119,28 +164,28 @@ templ Projects() {
 	}
 }
 
-templ projectCard(title string, description string, tags []string, category string, githubLink string, liveLink string, featured bool) {
-	<article 
-		class={ "project-card p-6 h-full flex flex-col animate-fade-in-up", templ.KV("delay-100", true) }
+templ projectCard(title string, description string, tags []string, category string, githubLink string, liveLink string, featured bool, icon string) {
+	<article
+		class={ "project-card p-6 h-full flex flex-col", templ.KV("delay-100", true) }
 		aria-label={ "Project: " + title }
 	>
 		<div class="project-card-content flex-1 flex flex-col">
-			<!-- Category & Featured Badge -->
+			<!-- Icon + Category & Featured Badge -->
 			<div class="flex items-center justify-between mb-3">
-				<span class="category-label">{ category }</span>
+				<div class="flex items-center gap-2.5">
+					<div class="project-icon">{ icon }</div>
+					<span class="category-label">{ category }</span>
+				</div>
 				if featured {
 					<span class="badge-featured">Featured</span>
 				}
 			</div>
-			
 			<!-- Title -->
 			<header>
 				<h3 class="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{ title }</h3>
 			</header>
-			
 			<!-- Description -->
 			<p class="text-muted-foreground text-sm mb-4 flex-1 leading-relaxed">{ description }</p>
-			
 			<!-- Tags -->
 			<nav aria-label={ "Technologies used in " + title }>
 				<ul class="flex flex-wrap gap-2 mb-6 list-none p-0" role="list">
@@ -151,12 +196,11 @@ templ projectCard(title string, description string, tags []string, category stri
 					}
 				</ul>
 			</nav>
-			
 			<!-- Links -->
 			<footer class="flex gap-3 mt-auto">
-				<a 
-					href={ templ.SafeURL(githubLink) } 
-					target="_blank" 
+				<a
+					href={ templ.SafeURL(githubLink) }
+					target="_blank"
 					rel="noopener noreferrer"
 					class="btn btn-sm btn-outline flex-1"
 					aria-label={ "View " + title + " source code on GitHub (opens in new tab)" }
@@ -167,9 +211,9 @@ templ projectCard(title string, description string, tags []string, category stri
 					GitHub
 				</a>
 				if liveLink != "" {
-					<a 
-						href={ templ.SafeURL(liveLink) } 
-						target="_blank" 
+					<a
+						href={ templ.SafeURL(liveLink) }
+						target="_blank"
 						rel="noopener noreferrer"
 						class="btn btn-sm btn-primary flex-1"
 						aria-label={ "View " + title + " live demo (opens in new tab)" }

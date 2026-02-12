@@ -4,7 +4,7 @@ import "github.com/FACorreiaa/fac-artifact/views/layouts"
 import "github.com/FACorreiaa/fac-artifact/views/components"
 
 templ About() {
-	@layouts.Base("About Me | Fernando Correia") {
+	@layouts.Base("About | FC Software Studio") {
 		<div class="min-h-screen flex flex-col bg-background text-foreground">
 			@components.Navbar("about")
 			<main class="flex-1">
@@ -14,13 +14,13 @@ templ About() {
 						<div class="grid md:grid-cols-2 gap-12 items-center">
 							<!-- Left: Content -->
 							<div class="animate-fade-in-up">
-								<span class="category-label block mb-4">Software Engineer</span>
-								<h1 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+								<span class="category-label block mb-4">Software Engineer • Studio Founder</span>
+								<h1 class="text-4xl md:text-6xl font-bold mb-6 text-foreground">
 									Hi, I'm <span class="text-gradient">Fernando</span>
 								</h1>
 								<p class="text-lg text-muted-foreground mb-6 leading-relaxed">
 									Passionate software engineer with expertise in Go, React, and distributed systems.
-									I build scalable solutions for finance, healthcare, and mobile platforms.
+									I build scalable solutions for finance, healthcare, and mobile platforms — and I run a software studio focused on shipping premium products.
 								</p>
 								<p class="text-muted-foreground mb-8">
 									Currently at iDWELL, building financial services from the ground up. Previously 
@@ -35,11 +35,14 @@ templ About() {
 							<!-- Right: Avatar/Stats -->
 							<div class="animate-fade-in-up delay-200">
 								<div class="glass-card p-8 rounded-2xl text-center">
-									<div class="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-accent mx-auto mb-6 flex items-center justify-center">
-										<span class="text-5xl">👨‍💻</span>
+									<div class="avatar-ring mx-auto mb-6" style="width:128px;height:128px;">
+										<div class="w-32 h-32 rounded-full bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center">
+											<span class="text-4xl font-bold text-white" style="-webkit-text-fill-color:white;">FC</span>
+										</div>
 									</div>
 									<h2 class="text-2xl font-bold text-foreground mb-2">Fernando Correia</h2>
-									<p class="text-primary font-medium mb-4">Software Engineer</p>
+									<p class="text-primary font-medium mb-2">Software Engineer</p>
+									<p class="text-sm text-muted-foreground mb-4">FC Software Studio — Founder</p>
 									<div class="flex justify-center gap-3">
 										<a href="https://github.com/FACorreiaa" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
 											<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -63,64 +66,60 @@ templ About() {
 						</div>
 					</div>
 				</section>
-
 				<!-- Stats Section -->
-				<section class="py-16 px-4 bg-muted pattern-grid">
+				<section class="py-16 px-4 bg-muted pattern-grid" data-reveal-stagger>
 					<div class="container mx-auto max-w-5xl">
 						<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-							<div class="glass-card stat-card rounded-xl animate-fade-in-up delay-100">
+							<div class="glass-card stat-card rounded-xl animate-scale-in delay-100">
 								<div class="stat-value">7+</div>
 								<div class="stat-label">Years Experience</div>
 							</div>
-							<div class="glass-card stat-card rounded-xl animate-fade-in-up delay-200">
+							<div class="glass-card stat-card rounded-xl animate-scale-in delay-200">
 								<div class="stat-value">15+</div>
 								<div class="stat-label">Projects Delivered</div>
 							</div>
-							<div class="glass-card stat-card rounded-xl animate-fade-in-up delay-300">
+							<div class="glass-card stat-card rounded-xl animate-scale-in delay-300">
 								<div class="stat-value">10+</div>
 								<div class="stat-label">Technologies</div>
 							</div>
-							<div class="glass-card stat-card rounded-xl animate-fade-in-up delay-400">
+							<div class="glass-card stat-card rounded-xl animate-scale-in delay-400">
 								<div class="stat-value">4</div>
 								<div class="stat-label">Countries</div>
 							</div>
 						</div>
 					</div>
 				</section>
-
 				<!-- Values/Skills Section -->
 				<section class="py-20 px-4 bg-background">
 					<div class="container mx-auto max-w-5xl">
-						<div class="text-center mb-12">
+						<div class="text-center mb-12" data-reveal>
 							<h2 class="section-heading text-3xl font-bold text-foreground inline-block">What I Bring</h2>
 						</div>
-						<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-							@valueCard("🤝", "Team Player", "Collaborative approach to solving complex problems together")
-							@valueCard("🧩", "Problem Solving", "Breaking down challenges into elegant, maintainable solutions")
-							@valueCard("💡", "Innovation", "Staying ahead with modern patterns and emerging technologies")
-							@valueCard("🎯", "Delivery", "Focused on shipping quality software that makes an impact")
+						<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" data-reveal-stagger>
+							@valueCard("🤝", "Team Player", "Collaborative approach to solving complex problems together", "from-indigo-500/10 to-blue-500/10")
+							@valueCard("🧩", "Problem Solving", "Breaking down challenges into elegant, maintainable solutions", "from-cyan-500/10 to-teal-500/10")
+							@valueCard("💡", "Innovation", "Staying ahead with modern patterns and emerging technologies", "from-amber-500/10 to-orange-500/10")
+							@valueCard("🎯", "Delivery", "Focused on shipping quality software that makes an impact", "from-emerald-500/10 to-green-500/10")
 						</div>
 					</div>
 				</section>
-
 				<!-- Interests Section -->
-				<section class="py-16 px-4 bg-muted">
+				<section class="py-16 px-4 bg-muted" data-reveal>
 					<div class="container mx-auto max-w-4xl text-center">
 						<h2 class="section-heading text-2xl font-bold text-foreground inline-block mb-8">Interests</h2>
 						<div class="flex flex-wrap justify-center gap-4">
-							<span class="badge badge-lg glass-card hover-lift">🚀 Technology</span>
-							<span class="badge badge-lg glass-card hover-lift">🌍 Open Source</span>
-							<span class="badge badge-lg glass-card hover-lift">💻 Innovation</span>
-							<span class="badge badge-lg glass-card hover-lift">📚 Continuous Learning</span>
-							<span class="badge badge-lg glass-card hover-lift">🏃 Fitness</span>
+							<span class="badge badge-lg glass-card hover-lift px-5 py-2.5">🚀 Technology</span>
+							<span class="badge badge-lg glass-card hover-lift px-5 py-2.5">🌍 Open Source</span>
+							<span class="badge badge-lg glass-card hover-lift px-5 py-2.5">💻 Innovation</span>
+							<span class="badge badge-lg glass-card hover-lift px-5 py-2.5">📚 Continuous Learning</span>
+							<span class="badge badge-lg glass-card hover-lift px-5 py-2.5">🏃 Fitness</span>
 						</div>
 					</div>
 				</section>
-
 				<!-- Contact CTA -->
-				<section class="py-20 px-4 bg-background">
+				<section class="py-20 px-4 bg-background" data-reveal="scale">
 					<div class="container mx-auto max-w-4xl">
-						<div class="glass-card p-12 rounded-2xl text-center">
+						<div class="glass-card p-12 rounded-2xl text-center border-gradient">
 							<h2 class="text-3xl font-bold mb-4 text-foreground">Let's Connect</h2>
 							<p class="text-muted-foreground mb-8 max-w-xl mx-auto">
 								Whether you're looking for a collaborator, have a question, or just want to say hi —
@@ -140,9 +139,11 @@ templ About() {
 	}
 }
 
-templ valueCard(emoji string, title string, description string) {
-	<div class="glass-card p-6 rounded-xl text-center hover-lift animate-fade-in-up">
-		<div class="text-4xl mb-4">{ emoji }</div>
+templ valueCard(emoji string, title string, description string, gradientClasses string) {
+	<div class="glass-card p-6 rounded-xl text-center hover-lift">
+		<div class={ "w-16 h-16 rounded-2xl bg-gradient-to-br mx-auto mb-4 flex items-center justify-center text-3xl", gradientClasses }>
+			{ emoji }
+		</div>
 		<h3 class="font-bold text-foreground mb-2">{ title }</h3>
 		<p class="text-sm text-muted-foreground">{ description }</p>
 	</div>

@@ -2,7 +2,7 @@ package layouts
 
 templ Base(title string) {
 	<!DOCTYPE html>
-	<html lang="en">
+	<html lang="en" class="scroll-smooth">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -28,35 +28,95 @@ templ Base(title string) {
 						localStorage.setItem('theme', 'dark');
 					}
 				}
+
+				// Mobile menu toggle
+				function toggleMobileMenu() {
+					const drawer = document.getElementById('mobile-drawer');
+					const overlay = document.getElementById('mobile-overlay');
+					if (drawer && overlay) {
+						drawer.classList.toggle('open');
+						overlay.classList.toggle('open');
+						document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+					}
+				}
+
+				function closeMobileMenu() {
+					const drawer = document.getElementById('mobile-drawer');
+					const overlay = document.getElementById('mobile-overlay');
+					if (drawer && overlay) {
+						drawer.classList.remove('open');
+						overlay.classList.remove('open');
+						document.body.style.overflow = '';
+					}
+				}
 			</script>
 			<!-- SEO Meta Tags -->
-			<meta name="description" content="Fernando Correia - Software Engineer specializing in Go, React, and distributed systems. Building scalable solutions for finance, healthcare, and mobile platforms."/>
+			<meta name="description" content="FC Software Studio — Building polished web apps, high-performance iOS apps, and custom product engineering services. Founded by Fernando Correia, software engineer with 7+ years of expertise in Go, React, and distributed systems."/>
 			<meta name="author" content="Fernando Correia"/>
-			<meta name="keywords" content="Software Engineer, Go Developer, React, TypeScript, gRPC, Microservices, Portugal"/>
+			<meta name="keywords" content="Software Studio, Web Apps, iOS Apps, Go Developer, React, TypeScript, Product Engineering, Custom Software, Fernando Correia"/>
 			<!-- Open Graph -->
 			<meta property="og:title" content={ title }/>
-			<meta property="og:description" content="Software Engineer building scalable solutions with Go, React, and modern technologies"/>
+			<meta property="og:description" content="FC Software Studio — Polished web and iOS apps, built with engineering excellence."/>
 			<meta property="og:type" content="website"/>
 			<!-- PWA Meta Tags -->
 			<link rel="manifest" href="/assets/static/manifest.json"/>
-			<meta name="theme-color" content="#f59e0b"/>
+			<meta name="theme-color" content="#4f46e5"/>
 			<meta name="apple-mobile-web-app-capable" content="yes"/>
 			<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 			<link rel="apple-touch-icon" href="/assets/static/icon-192.png"/>
-			<!-- Stylesheets -->
+			<!-- Font Preloads -->
 			<link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 			<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+			<!-- Stylesheets -->
 			<link rel="stylesheet" href="/assets/css/output.css"/>
 			<link rel="stylesheet" href="/assets/css/custom.css"/>
 		</head>
 		<body>
 			{ children... }
-			<!-- JavaScript Libraries (loaded at end for performance) -->
+			<!-- Scroll-to-top button -->
+			<button onclick="window.scrollTo({top:0})" class="scroll-to-top" id="scroll-top-btn" aria-label="Scroll to top">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="m18 15-6-6-6 6"></path>
+				</svg>
+			</button>
+			<!-- JavaScript Libraries -->
 			<script src="/assets/js/htmx.min.js"></script>
 			<script src="/assets/js/hyperscript.min.js"></script>
-			<!-- <script src="/assets/js/alpinejs.min.js" defer></script> -->
 			<script src="/assets/js/basecoat.min.js" defer></script>
+			<!-- Scroll-to-top visibility + Scroll reveal -->
+			<script>
+				(function() {
+					// Scroll-to-top
+					const btn = document.getElementById('scroll-top-btn');
+					if (btn) {
+						window.addEventListener('scroll', function() {
+							if (window.scrollY > 400) {
+								btn.classList.add('visible');
+							} else {
+								btn.classList.remove('visible');
+							}
+						}, { passive: true });
+					}
+
+					// Scroll reveal for [data-reveal] elements
+					const revealEls = document.querySelectorAll('[data-reveal], [data-reveal-stagger]');
+					if (revealEls.length > 0 && 'IntersectionObserver' in window) {
+						const observer = new IntersectionObserver(function(entries) {
+							entries.forEach(function(entry) {
+								if (entry.isIntersecting) {
+									entry.target.classList.add('revealed');
+									observer.unobserve(entry.target);
+								}
+							});
+						}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+						revealEls.forEach(function(el) { observer.observe(el); });
+					} else {
+						// Fallback: show everything
+						revealEls.forEach(function(el) { el.classList.add('revealed'); });
+					}
+				})();
+			</script>
 			<!-- Service Worker Registration -->
 			<script>
 				if ('serviceWorker' in navigator) {
