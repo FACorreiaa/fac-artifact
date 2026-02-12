@@ -1272,6 +1272,63 @@ li {
     box-shadow: 0 16px 28px -20px rgba(0, 0, 0, 0.15);
 }
 
+/* Let's Connect section refinements */
+.connect-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.connect-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(45rem 20rem at 8% -10%, rgba(79, 70, 229, 0.08), transparent 60%),
+        radial-gradient(40rem 18rem at 100% 120%, rgba(6, 182, 212, 0.08), transparent 60%);
+    pointer-events: none;
+}
+
+.connect-grid {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-card-icon {
+    width: 58px;
+    height: 58px;
+    margin-inline: auto;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: rgba(79, 70, 229, 0.08);
+    border: 1px solid rgba(79, 70, 229, 0.16);
+}
+
+.dark .contact-card-icon {
+    background: rgba(129, 140, 248, 0.12);
+    border-color: rgba(129, 140, 248, 0.24);
+}
+
+/* Explicitly disable hover animation/shimmer for Let's Connect cards */
+.contact-card-static {
+    transition: none !important;
+}
+
+.contact-card-static::after,
+.contact-card-static:hover::after {
+    display: none !important;
+    animation: none !important;
+}
+
+.contact-card-static:hover {
+    transform: none !important;
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.04),
+        0 8px 24px -12px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    border-color: var(--glass-border) !important;
+}
+
 .border-gradient {
     border: 1px solid transparent;
     background-image:
