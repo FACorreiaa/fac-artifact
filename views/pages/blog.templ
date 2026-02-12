@@ -4,7 +4,7 @@ import "github.com/FACorreiaa/fac-artifact/views/layouts"
 import "github.com/FACorreiaa/fac-artifact/views/components"
 
 templ Blog() {
-	@layouts.Base("Blog | Fernando Correia") {
+	@layouts.Base("Blog | FC Software Studio") {
 		<div class="min-h-screen flex flex-col bg-background text-foreground">
 			@components.Navbar("blog")
 			<main class="flex-1">
@@ -12,44 +12,42 @@ templ Blog() {
 				<section class="hero-gradient min-h-[70vh] flex items-center justify-center">
 					<div class="text-center px-4">
 						<div class="max-w-2xl mx-auto">
-							<!-- Animated Icon -->
+							<!-- Animated Icon with Progress Ring -->
 							<div class="relative w-24 h-24 mx-auto mb-8 animate-fade-in">
-								<div class="absolute inset-0 rounded-2xl bg-primary/20 animate-pulse"></div>
-								<div class="relative w-full h-full rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-									<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground">
-										<path d="M12 19l7-7 3 3-7 7-3-3z"/>
-										<path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-										<path d="M2 2l7.586 7.586"/>
-										<circle cx="11" cy="11" r="2"/>
-									</svg>
+								<div class="progress-ring-container w-full h-full">
+									<div class="ring-bg"></div>
+									<div class="ring-progress"></div>
+									<div class="relative w-full h-full rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground">
+											<path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+											<path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+											<path d="M2 2l7.586 7.586"></path>
+											<circle cx="11" cy="11" r="2"></circle>
+										</svg>
+									</div>
 								</div>
 							</div>
-							
 							<span class="category-label block mb-4 animate-fade-in-up delay-100">Coming Soon</span>
-							<h1 class="text-4xl md:text-5xl font-bold mb-6 text-foreground animate-fade-in-up delay-200">
+							<h1 class="text-4xl md:text-6xl font-bold mb-6 text-foreground animate-fade-in-up delay-200">
 								The <span class="text-gradient">Blog</span> is Brewing
 							</h1>
-							<p class="text-xl text-muted-foreground mb-8 animate-fade-in-up delay-300">
+							<p class="text-xl text-muted-foreground mb-10 animate-fade-in-up delay-300">
 								I'll be sharing thoughts on software engineering, Go development, 
 								distributed systems, and lessons learned building scalable applications.
 							</p>
-							
-							<!-- Coming Soon Card -->
+							<!-- Newsletter Signup Teaser -->
 							<div class="glass-card p-8 max-w-md mx-auto rounded-2xl animate-fade-in-up delay-400">
-								<div class="text-4xl mb-4">✨</div>
-								<h2 class="text-xl font-bold text-foreground mb-3">Stay Tuned</h2>
-								<p class="text-muted-foreground mb-6">
-									Want to know when articles drop? Get in touch and I'll let you know.
+								<div class="text-3xl mb-3">✨</div>
+								<h2 class="text-xl font-bold text-foreground mb-3">Get Notified</h2>
+								<p class="text-muted-foreground mb-5 text-sm">
+									Be the first to know when new articles drop. Join the list.
 								</p>
-								<a href="mailto:fernandocorreia316@gmail.com?subject=Blog%20Updates" class="btn btn-primary btn-glow w-full">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-										<rect width="20" height="16" x="2" y="4" rx="2"></rect>
-										<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-									</svg>
-									Notify Me
-								</a>
+								<div class="newsletter-input mb-3">
+									<input type="email" placeholder="you@example.com" disabled/>
+									<button type="button" disabled>Notify Me</button>
+								</div>
+								<p class="text-xs text-muted-foreground">Coming soon — no spam, ever.</p>
 							</div>
-							
 							<!-- Topics Preview -->
 							<div class="mt-12 animate-fade-in-up delay-500">
 								<p class="text-sm text-muted-foreground mb-4">Topics I'll be covering:</p>
@@ -57,8 +55,9 @@ templ Blog() {
 									<span class="badge badge-outline">Go & Backend</span>
 									<span class="badge badge-outline">React & Mobile</span>
 									<span class="badge badge-outline">System Design</span>
-									<span class="badge badge-outline">Career Insights</span>
+									<span class="badge badge-outline">Building in Public</span>
 									<span class="badge badge-outline">DevOps</span>
+									<span class="badge badge-outline">iOS Development</span>
 								</div>
 							</div>
 						</div>

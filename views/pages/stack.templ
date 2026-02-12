@@ -4,7 +4,7 @@ import "github.com/FACorreiaa/fac-artifact/views/layouts"
 import "github.com/FACorreiaa/fac-artifact/views/components"
 
 templ Stack() {
-	@layouts.Base("Stack | Fernando Correia") {
+	@layouts.Base("Stack | FC Software Studio") {
 		<div class="min-h-screen flex flex-col bg-background text-foreground">
 			@components.Navbar("stack")
 			<main class="flex-1">
@@ -12,7 +12,7 @@ templ Stack() {
 				<section class="hero-gradient py-20">
 					<div class="container mx-auto max-w-4xl px-4 text-center">
 						<span class="category-label block mb-4 animate-fade-in">Technologies</span>
-						<h1 class="text-4xl md:text-5xl font-bold mb-4 text-foreground animate-fade-in-up delay-100">
+						<h1 class="text-4xl md:text-6xl font-bold mb-4 text-foreground animate-fade-in-up delay-100">
 							Tech <span class="text-gradient">Stack</span>
 						</h1>
 						<p class="text-xl text-muted-foreground animate-fade-in-up delay-200">
@@ -20,98 +20,92 @@ templ Stack() {
 						</p>
 					</div>
 				</section>
-
 				<!-- Backend -->
-				<section class="py-16 px-4 bg-background">
+				<section class="py-16 px-4 bg-background" data-reveal>
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
-							<span class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-xl">⚙️</span>
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center text-xl">⚙️</span>
 							<span>Backend Development</span>
 						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techCard("Go", "primary")
-							@techCard("C#", "secondary")
-							@techCard("TypeScript", "accent")
-							@techCard("JavaScript", "default")
-							@techCard("SQL", "default")
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" data-reveal-stagger>
+							@techCard("Go", "●●●")
+							@techCard("C#", "●●○")
+							@techCard("TypeScript", "●●●")
+							@techCard("JavaScript", "●●●")
+							@techCard("SQL", "●●●")
 						</div>
 					</div>
 				</section>
-
 				<!-- Frontend -->
-				<section class="py-16 px-4 bg-muted pattern-dots">
+				<section class="py-16 px-4 bg-muted pattern-dots" data-reveal>
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
-							<span class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-xl">🎨</span>
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center text-xl">🎨</span>
 							<span>Frontend Development</span>
 						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techCard("React", "primary")
-							@techCard("React Native", "primary")
-							@techCard("Angular", "secondary")
-							@techCard("Redux", "accent")
-							@techCard("HTML", "default")
-							@techCard("CSS", "default")
-							@techCard("Tailwind", "default")
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" data-reveal-stagger>
+							@techCard("React", "●●●")
+							@techCard("React Native", "●●○")
+							@techCard("Angular", "●●○")
+							@techCard("Redux", "●●○")
+							@techCard("HTML", "●●●")
+							@techCard("CSS", "●●●")
+							@techCard("Tailwind", "●●●")
 						</div>
 					</div>
 				</section>
-
 				<!-- Databases -->
-				<section class="py-16 px-4 bg-background">
+				<section class="py-16 px-4 bg-background" data-reveal>
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
-							<span class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-xl">🗄️</span>
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="w-10 h-10 rounded-lg bg-purple-500/15 flex items-center justify-center text-xl">🗄️</span>
 							<span>Databases</span>
 						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techCard("PostgreSQL", "primary")
-							@techCard("MSSQL", "secondary")
-							@techCard("MongoDB", "accent")
-							@techCard("Redis", "default")
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" data-reveal-stagger>
+							@techCard("PostgreSQL", "●●●")
+							@techCard("MSSQL", "●●○")
+							@techCard("MongoDB", "●●○")
+							@techCard("Redis", "●●○")
 						</div>
 					</div>
 				</section>
-
 				<!-- Cloud & APIs -->
-				<section class="py-16 px-4 bg-muted pattern-diagonal">
+				<section class="py-16 px-4 bg-muted pattern-diagonal" data-reveal>
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
-							<span class="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-xl">☁️</span>
-							<span>Cloud & APIs</span>
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="w-10 h-10 rounded-lg bg-cyan-500/15 flex items-center justify-center text-xl">☁️</span>
+							<span>Cloud &amp; APIs</span>
 						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techCard("REST", "primary")
-							@techCard("gRPC", "primary")
-							@techCard("GraphQL", "secondary")
-							@techCard("PostgREST", "accent")
-							@techCard("Microservices", "default")
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" data-reveal-stagger>
+							@techCard("REST", "●●●")
+							@techCard("gRPC", "●●●")
+							@techCard("GraphQL", "●●○")
+							@techCard("PostgREST", "●●○")
+							@techCard("Microservices", "●●●")
 						</div>
 					</div>
 				</section>
-
 				<!-- DevOps & Tools -->
-				<section class="py-16 px-4 bg-background">
+				<section class="py-16 px-4 bg-background" data-reveal>
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
-							<span class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-xl">🛠️</span>
-							<span>DevOps & Tools</span>
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
+							<span class="w-10 h-10 rounded-lg bg-amber-500/15 flex items-center justify-center text-xl">🛠️</span>
+							<span>DevOps &amp; Tools</span>
 						</h2>
-						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techCard("Docker", "primary")
-							@techCard("Kafka", "secondary")
-							@techCard("Datadog", "accent")
-							@techCard("Git", "default")
-							@techCard("Jira", "default")
-							@techCard("CI/CD", "default")
+						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" data-reveal-stagger>
+							@techCard("Docker", "●●●")
+							@techCard("Kafka", "●●○")
+							@techCard("Datadog", "●●○")
+							@techCard("Git", "●●●")
+							@techCard("Jira", "●●○")
+							@techCard("CI/CD", "●●●")
 						</div>
 					</div>
 				</section>
-
 				<!-- CTA -->
-				<section class="py-16 px-4 bg-muted">
+				<section class="py-16 px-4 bg-muted" data-reveal="scale">
 					<div class="container mx-auto max-w-4xl text-center">
-						<div class="glass-card p-10 rounded-2xl">
+						<div class="glass-card p-10 rounded-2xl border-gradient">
 							<h2 class="text-2xl font-bold mb-4 text-foreground">Always Learning</h2>
 							<p class="text-muted-foreground mb-6">
 								Technology evolves quickly. I'm constantly exploring new tools and patterns 
@@ -127,8 +121,9 @@ templ Stack() {
 	}
 }
 
-templ techCard(name string, variant string) {
-	<div class="tech-card glass-card animate-fade-in-up">
-		<span class="font-semibold text-foreground">{ name }</span>
+templ techCard(name string, proficiency string) {
+	<div class="tech-card glass-card">
+		<span class="font-semibold text-foreground block">{ name }</span>
+		<span class="text-xs text-primary mt-1 block tracking-wider" aria-label={ "Proficiency: " + proficiency }>{ proficiency }</span>
 	</div>
 }
