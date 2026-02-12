@@ -1,0 +1,182 @@
+package pages
+
+import "github.com/FACorreiaa/fac-artifact/views/components"
+import "github.com/FACorreiaa/fac-artifact/views/layouts"
+
+templ Proposal(data ProposalPageData) {
+	@layouts.Base("Request Proposal | Fernando Correia") {
+		<div class="min-h-screen flex flex-col bg-background text-foreground">
+			@components.Navbar("")
+			<main class="flex-1">
+				<section class="hero-gradient py-20">
+					<div class="container mx-auto max-w-5xl px-4">
+						<div class="text-center mb-10 animate-fade-in-up">
+							<span class="category-label block mb-3">Project Inquiry</span>
+							<h1 class="text-4xl md:text-5xl font-bold mb-4">
+								Request a <span class="text-gradient">Proposal</span>
+							</h1>
+							<p class="text-muted-foreground max-w-2xl mx-auto">
+								Share your goals for a web app, iOS app, or product engineering engagement.
+								I will reply with scope guidance and next steps.
+							</p>
+						</div>
+
+						if data.Success {
+							<div class="max-w-2xl mx-auto glass-card p-10 rounded-2xl text-center animate-scale-in">
+								<div class="w-16 h-16 rounded-full bg-primary/15 text-primary mx-auto mb-5 flex items-center justify-center">
+									<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+										<path d="m20 6-11 11-5-5"/>
+									</svg>
+								</div>
+								<h2 class="text-2xl font-bold mb-3">Proposal Request Received</h2>
+								<p class="text-muted-foreground mb-6">
+									Thanks for the details. I will review your request and get back to you shortly.
+								</p>
+								<div class="flex flex-wrap justify-center gap-3">
+									<a href="/book-call" class="btn btn-primary btn-glow">Book a Call</a>
+									<a href="/projects" class="btn btn-outline">Back to Projects</a>
+								</div>
+							</div>
+						} else {
+							<div class="grid lg:grid-cols-3 gap-8 items-start">
+								<div class="lg:col-span-2 glass-card p-8 md:p-10 rounded-2xl animate-fade-in-up">
+									if data.Error != "" {
+										<div class="alert alert-destructive mb-6">
+											<section>
+												<strong>Submission issue</strong>
+												<p>{ data.Error }</p>
+											</section>
+										</div>
+									}
+
+									<form action="/proposal" method="POST" class="space-y-5">
+										<input type="text" name="website" autocomplete="off" tabindex="-1" class="hidden"/>
+
+										<div class="grid md:grid-cols-2 gap-4">
+											<div class="space-y-2">
+												<label for="name" class="text-sm font-medium text-foreground">Full Name *</label>
+												<input id="name" name="name" type="text" value={ data.Form.Name } required class="input w-full" placeholder="Your name"/>
+											</div>
+											<div class="space-y-2">
+												<label for="email" class="text-sm font-medium text-foreground">Work Email *</label>
+												<input id="email" name="email" type="email" value={ data.Form.Email } required class="input w-full" placeholder="you@company.com"/>
+											</div>
+										</div>
+
+										<div class="grid md:grid-cols-2 gap-4">
+											<div class="space-y-2">
+												<label for="company" class="text-sm font-medium text-foreground">Company</label>
+												<input id="company" name="company" type="text" value={ data.Form.Company } class="input w-full" placeholder="Company name"/>
+											</div>
+											<div class="space-y-2">
+												<label for="project_type" class="text-sm font-medium text-foreground">Project Type *</label>
+												<select id="project_type" name="project_type" required class="select w-full">
+													if data.Form.ProjectType == "" {
+														<option value="" selected disabled>Select one</option>
+													} else {
+														<option value="" disabled>Select one</option>
+													}
+													if data.Form.ProjectType == "web_app" {
+														<option value="web_app" selected>Web App</option>
+													} else {
+														<option value="web_app">Web App</option>
+													}
+													if data.Form.ProjectType == "ios_app" {
+														<option value="ios_app" selected>iOS App</option>
+													} else {
+														<option value="ios_app">iOS App</option>
+													}
+													if data.Form.ProjectType == "web_and_ios" {
+														<option value="web_and_ios" selected>Web + iOS</option>
+													} else {
+														<option value="web_and_ios">Web + iOS</option>
+													}
+													if data.Form.ProjectType == "product_engineering" {
+														<option value="product_engineering" selected>Product Engineering Services</option>
+													} else {
+														<option value="product_engineering">Product Engineering Services</option>
+													}
+												</select>
+											</div>
+										</div>
+
+										<div class="grid md:grid-cols-2 gap-4">
+											<div class="space-y-2">
+												<label for="budget" class="text-sm font-medium text-foreground">Estimated Budget</label>
+												<select id="budget" name="budget" class="select w-full">
+													if data.Form.Budget == "" {
+														<option value="" selected>Not sure yet</option>
+													} else {
+														<option value="">Not sure yet</option>
+													}
+													if data.Form.Budget == "under_10k" {
+														<option value="under_10k" selected>Under $10k</option>
+													} else {
+														<option value="under_10k">Under $10k</option>
+													}
+													if data.Form.Budget == "10k_25k" {
+														<option value="10k_25k" selected>$10k - $25k</option>
+													} else {
+														<option value="10k_25k">$10k - $25k</option>
+													}
+													if data.Form.Budget == "25k_50k" {
+														<option value="25k_50k" selected>$25k - $50k</option>
+													} else {
+														<option value="25k_50k">$25k - $50k</option>
+													}
+													if data.Form.Budget == "50k_plus" {
+														<option value="50k_plus" selected>$50k+</option>
+													} else {
+														<option value="50k_plus">$50k+</option>
+													}
+												</select>
+											</div>
+											<div class="space-y-2">
+												<label for="timeline" class="text-sm font-medium text-foreground">Target Timeline</label>
+												<input id="timeline" name="timeline" type="text" value={ data.Form.Timeline } class="input w-full" placeholder="Example: 8-10 weeks"/>
+											</div>
+										</div>
+
+										<div class="space-y-2">
+											<label for="details" class="text-sm font-medium text-foreground">Project Details *</label>
+											<textarea id="details" name="details" required rows="7" class="textarea w-full" placeholder="What are you building, who is it for, and what business outcome do you want?">{ data.Form.Details }</textarea>
+										</div>
+
+										<div class="flex flex-wrap items-center gap-3 pt-2">
+											<button type="submit" class="btn btn-primary btn-glow">Send Proposal Request</button>
+											<a href="/book-call" class="btn btn-outline">Prefer to talk first?</a>
+										</div>
+									</form>
+								</div>
+
+								<aside class="glass-card p-6 rounded-2xl animate-fade-in-up delay-200">
+									<h3 class="text-lg font-bold mb-3">What Happens Next</h3>
+									<ul class="space-y-3 text-sm text-muted-foreground">
+										<li class="flex items-start gap-2">
+											<span class="text-primary mt-1">1.</span>
+											<span>I review your goals and constraints.</span>
+										</li>
+										<li class="flex items-start gap-2">
+											<span class="text-primary mt-1">2.</span>
+											<span>You get a clear response with recommended approach.</span>
+										</li>
+										<li class="flex items-start gap-2">
+											<span class="text-primary mt-1">3.</span>
+											<span>We align on scope, timeline, and delivery model.</span>
+										</li>
+									</ul>
+									<div class="mt-6 pt-6 border-t border-border">
+										<p class="text-sm text-muted-foreground mb-2">Need immediate discussion?</p>
+										<a href="/book-call" class="btn btn-sm btn-primary w-full">Book a Call</a>
+									</div>
+								</aside>
+							</div>
+						}
+					</div>
+				</section>
+			</main>
+			@components.Footer()
+		</div>
+	}
+}
+

@@ -2,8 +2,11 @@ package server
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
+	"net/mail"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -14,6 +17,11 @@ import (
 
 	"github.com/FACorreiaa/fac-artifact/assets"
 	"github.com/FACorreiaa/fac-artifact/views/pages"
+)
+
+const (
+	defaultCalendlyURL  = "https://calendly.com/fernandocorreia316"
+	maxProposalBodySize = 1 << 20 // 1 MiB
 )
 
 // RegisterRoutes sets up all routes and middleware
@@ -100,6 +108,9 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	// Health check
 	r.Get("/health", s.handleHealth)
+	r.Get("/book-call", s.handleBookCall)
+	r.Get("/proposal", s.handleProposalGet)
+	r.Post("/proposal", s.handleProposalSubmit)
 
 	// Pages
 	r.Get("/", s.handleProjects)             // Main page is Projects
@@ -169,4 +180,124 @@ func (s *Server) handleAPIHello(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{
 		"message": "Hello from GoForge!",
 	})
+}
+
+// handleBookCall redirects users to Calendly.
+func (s *Server) handleBookCall(w http.ResponseWriter, r *http.Request) {
+	calendlyURL := strings.TrimSpace(os.Getenv("CALENDLY_URL"))
+	if calendlyURL == "" {
+		calendlyURL = defaultCalendlyURL
+	}
+	if !strings.HasPrefix(calendlyURL, "http://") && !strings.HasPrefix(calendlyURL, "https://") {
+		calendlyURL = "https://" + calendlyURL
+	}
+
+	http.Redirect(w, r, calendlyURL, http.StatusTemporaryRedirect)
+}
+
+// handleProposalGet renders the proposal request form.
+func (s *Server) handleProposalGet(w http.ResponseWriter, r *http.Request) {
+	s.renderProposalPage(w, r, pages.ProposalPageData{}, http.StatusOK)
+}
+
+// handleProposalSubmit validates and processes proposal form submissions.
+func (s *Server) handleProposalSubmit(w http.ResponseWriter, r *http.Request) {
+	r.Body = http.MaxBytesReader(w, r.Body, maxProposalBodySize)
+	if err := r.ParseForm(); err != nil {
+		s.renderProposalPage(w, r, pages.ProposalPageData{
+			Error: "Unable to read your request. Please try again.",
+		}, http.StatusBadRequest)
+		return
+	}
+
+	form := pages.ProposalFormData{
+		Name:        strings.TrimSpace(r.FormValue("name")),
+		Email:       strings.TrimSpace(r.FormValue("email")),
+		Company:     strings.TrimSpace(r.FormValue("company")),
+		ProjectType: strings.TrimSpace(r.FormValue("project_type")),
+		Budget:      strings.TrimSpace(r.FormValue("budget")),
+		Timeline:    strings.TrimSpace(r.FormValue("timeline")),
+		Details:     strings.TrimSpace(r.FormValue("details")),
+	}
+
+	// Honeypot field for basic bot filtering.
+	if strings.TrimSpace(r.FormValue("website")) != "" {
+		s.renderProposalPage(w, r, pages.ProposalPageData{
+			Success: true,
+		}, http.StatusCreated)
+		return
+	}
+
+	if validationErr := validateProposalForm(form); validationErr != "" {
+		s.renderProposalPage(w, r, pages.ProposalPageData{
+			Form:  form,
+			Error: validationErr,
+		}, http.StatusBadRequest)
+		return
+	}
+
+	log.Printf(
+		"proposal request received name=%q email=%q company=%q project_type=%q budget=%q timeline=%q details_len=%d",
+		form.Name,
+		form.Email,
+		form.Company,
+		form.ProjectType,
+		form.Budget,
+		form.Timeline,
+		len(form.Details),
+	)
+
+	s.renderProposalPage(w, r, pages.ProposalPageData{
+		Success: true,
+	}, http.StatusCreated)
+}
+
+func validateProposalForm(form pages.ProposalFormData) string {
+	if len(form.Name) < 2 {
+		return "Please provide your full name."
+	}
+	if len(form.Name) > 100 {
+		return "Name is too long. Please keep it under 100 characters."
+	}
+
+	if form.Email == "" {
+		return "Please provide your email address."
+	}
+	if _, err := mail.ParseAddress(form.Email); err != nil {
+		return "Please provide a valid email address."
+	}
+
+	if form.ProjectType == "" {
+		return "Please select the type of project."
+	}
+
+	if len(form.Company) > 120 {
+		return "Company name is too long. Please keep it under 120 characters."
+	}
+
+	if len(form.Budget) > 60 {
+		return "Budget information is too long. Please keep it concise."
+	}
+
+	if len(form.Timeline) > 60 {
+		return "Timeline information is too long. Please keep it concise."
+	}
+
+	if len(form.Details) < 20 {
+		return "Please share a bit more detail about your project (at least 20 characters)."
+	}
+	if len(form.Details) > 4000 {
+		return "Project details are too long. Please keep them under 4000 characters."
+	}
+
+	return ""
+}
+
+func (s *Server) renderProposalPage(w http.ResponseWriter, r *http.Request, data pages.ProposalPageData, statusCode int) {
+	w.WriteHeader(statusCode)
+
+	component := pages.Proposal(data)
+	if err := component.Render(r.Context(), w); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
