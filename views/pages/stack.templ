@@ -9,10 +9,13 @@ templ Stack() {
 			@components.Navbar("stack")
 			<main class="flex-1">
 				<!-- Hero Section -->
-				<section class="py-16 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+				<section class="hero-gradient py-20">
 					<div class="container mx-auto max-w-4xl px-4 text-center">
-						<h1 class="text-4xl font-bold mb-4 text-foreground">Tech <span class="text-primary">Stack</span></h1>
-						<p class="text-xl text-muted-foreground">
+						<span class="category-label block mb-4 animate-fade-in">Technologies</span>
+						<h1 class="text-4xl md:text-5xl font-bold mb-4 text-foreground animate-fade-in-up delay-100">
+							Tech <span class="text-gradient">Stack</span>
+						</h1>
+						<p class="text-xl text-muted-foreground animate-fade-in-up delay-200">
 							Technologies and tools I use to build robust, scalable applications.
 						</p>
 					</div>
@@ -21,33 +24,35 @@ templ Stack() {
 				<!-- Backend -->
 				<section class="py-16 px-4 bg-background">
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">⚙️</span> Backend Development
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
+							<span class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-xl">⚙️</span>
+							<span>Backend Development</span>
 						</h2>
 						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("Go", "primary")
-							@techBadge("C#", "secondary")
-							@techBadge("TypeScript", "accent")
-							@techBadge("JavaScript", "default")
-							@techBadge("SQL", "default")
+							@techCard("Go", "primary")
+							@techCard("C#", "secondary")
+							@techCard("TypeScript", "accent")
+							@techCard("JavaScript", "default")
+							@techCard("SQL", "default")
 						</div>
 					</div>
 				</section>
 
 				<!-- Frontend -->
-				<section class="py-16 px-4 bg-muted">
+				<section class="py-16 px-4 bg-muted pattern-dots">
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">🎨</span> Frontend Development
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
+							<span class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-xl">🎨</span>
+							<span>Frontend Development</span>
 						</h2>
 						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("React", "primary")
-							@techBadge("React Native", "primary")
-							@techBadge("Angular", "secondary")
-							@techBadge("Redux", "accent")
-							@techBadge("HTML", "default")
-							@techBadge("CSS", "default")
-							@techBadge("Tailwind", "default")
+							@techCard("React", "primary")
+							@techCard("React Native", "primary")
+							@techCard("Angular", "secondary")
+							@techCard("Redux", "accent")
+							@techCard("HTML", "default")
+							@techCard("CSS", "default")
+							@techCard("Tailwind", "default")
 						</div>
 					</div>
 				</section>
@@ -55,30 +60,32 @@ templ Stack() {
 				<!-- Databases -->
 				<section class="py-16 px-4 bg-background">
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">🗄️</span> Databases
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
+							<span class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-xl">🗄️</span>
+							<span>Databases</span>
 						</h2>
 						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("PostgreSQL", "primary")
-							@techBadge("MSSQL", "secondary")
-							@techBadge("MongoDB", "accent")
-							@techBadge("Redis", "default")
+							@techCard("PostgreSQL", "primary")
+							@techCard("MSSQL", "secondary")
+							@techCard("MongoDB", "accent")
+							@techCard("Redis", "default")
 						</div>
 					</div>
 				</section>
 
 				<!-- Cloud & APIs -->
-				<section class="py-16 px-4 bg-muted">
+				<section class="py-16 px-4 bg-muted pattern-diagonal">
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">☁️</span> Cloud & APIs
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
+							<span class="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-xl">☁️</span>
+							<span>Cloud & APIs</span>
 						</h2>
 						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("REST", "primary")
-							@techBadge("gRPC", "primary")
-							@techBadge("GraphQL", "secondary")
-							@techBadge("PostgREST", "accent")
-							@techBadge("Microservices", "default")
+							@techCard("REST", "primary")
+							@techCard("gRPC", "primary")
+							@techCard("GraphQL", "secondary")
+							@techCard("PostgREST", "accent")
+							@techCard("Microservices", "default")
 						</div>
 					</div>
 				</section>
@@ -86,16 +93,31 @@ templ Stack() {
 				<!-- DevOps & Tools -->
 				<section class="py-16 px-4 bg-background">
 					<div class="container mx-auto max-w-5xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3">
-							<span class="text-3xl">🛠️</span> DevOps & Tools
+						<h2 class="text-2xl font-bold mb-8 text-foreground flex items-center gap-3 animate-fade-in-up">
+							<span class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-xl">🛠️</span>
+							<span>DevOps & Tools</span>
 						</h2>
 						<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-							@techBadge("Docker", "primary")
-							@techBadge("Kafka", "secondary")
-							@techBadge("Datadog", "accent")
-							@techBadge("Git", "default")
-							@techBadge("Jira", "default")
-							@techBadge("CI/CD", "default")
+							@techCard("Docker", "primary")
+							@techCard("Kafka", "secondary")
+							@techCard("Datadog", "accent")
+							@techCard("Git", "default")
+							@techCard("Jira", "default")
+							@techCard("CI/CD", "default")
+						</div>
+					</div>
+				</section>
+
+				<!-- CTA -->
+				<section class="py-16 px-4 bg-muted">
+					<div class="container mx-auto max-w-4xl text-center">
+						<div class="glass-card p-10 rounded-2xl">
+							<h2 class="text-2xl font-bold mb-4 text-foreground">Always Learning</h2>
+							<p class="text-muted-foreground mb-6">
+								Technology evolves quickly. I'm constantly exploring new tools and patterns 
+								to deliver better solutions.
+							</p>
+							<a href="/projects" class="btn btn-primary btn-glow">See My Work</a>
 						</div>
 					</div>
 				</section>
@@ -105,8 +127,8 @@ templ Stack() {
 	}
 }
 
-templ techBadge(name string, variant string) {
-	<div class="card p-4 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+templ techCard(name string, variant string) {
+	<div class="tech-card glass-card animate-fade-in-up">
 		<span class="font-semibold text-foreground">{ name }</span>
 	</div>
 }

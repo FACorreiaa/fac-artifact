@@ -9,81 +9,106 @@ templ Curriculum() {
 			@components.Navbar("curriculum")
 			<main class="flex-1">
 				<!-- Header -->
-				<section class="py-16 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+				<section class="hero-gradient py-20">
 					<div class="container mx-auto max-w-4xl px-4 text-center">
-						<h1 class="text-4xl font-bold mb-4 text-foreground">Fernando Correia</h1>
-						<p class="text-xl text-primary mb-4">Software Engineer</p>
-						<div class="flex flex-wrap justify-center gap-4 text-muted-foreground">
-							<span>📞 +351 937042328</span>
-							<span>✉️ fernandocorreia316@gmail.com</span>
-							<a href="https://github.com/FACorreiaa" target="_blank" class="text-primary hover:underline">
-								🔗 GitHub
+						<span class="category-label block mb-4 animate-fade-in">Resume</span>
+						<h1 class="text-4xl md:text-5xl font-bold mb-4 text-foreground animate-fade-in-up delay-100">Fernando Correia</h1>
+						<p class="text-xl text-primary mb-6 animate-fade-in-up delay-200">Software Engineer</p>
+						<div class="flex flex-wrap justify-center gap-4 text-muted-foreground mb-8 animate-fade-in-up delay-300">
+							<span class="flex items-center gap-2">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+								</svg>
+								<span>+351 937042328</span>
+							</span>
+							<span class="flex items-center gap-2">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<rect width="20" height="16" x="2" y="4" rx="2"></rect>
+									<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+								</svg>
+								<span>fernandocorreia316@gmail.com</span>
+							</span>
+							<a href="https://github.com/FACorreiaa" target="_blank" class="flex items-center gap-2 text-primary hover:underline">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+								</svg>
+								<span>GitHub</span>
 							</a>
+						</div>
+						<a href="mailto:fernandocorreia316@gmail.com?subject=CV%20Request" class="btn btn-primary btn-glow animate-fade-in-up delay-400">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+								<polyline points="7 10 12 15 17 10"/>
+								<line x1="12" x2="12" y1="15" y2="3"/>
+							</svg>
+							Request Full CV
+						</a>
+					</div>
+				</section>
+
+				<!-- Experience Timeline -->
+				<section class="py-20 px-4 bg-background">
+					<div class="container mx-auto max-w-4xl">
+						<h2 class="section-heading text-2xl font-bold mb-12 text-foreground">Experience</h2>
+						
+						<div class="timeline">
+							@experienceItem(
+								"Golang Developer",
+								"iDWELL",
+								"Aug 2024 – Present",
+								"Vienna, Austria (Remote)",
+								[]string{
+									"Starting financial development from ground up creating financial services to onboard clients and implementing CICD",
+									"Developing modular web services for finance sector with Go, Postgres, MSSQL, and GraphQL",
+									"Built scalable, robust APIs that streamline financial data processing",
+									"Collaborated with cross-functional teams to enhance system architecture",
+								},
+							)
+							
+							@experienceItem(
+								"Software Engineer",
+								"GSMK",
+								"Jan 2023 – Aug 2024",
+								"Berlin, Germany",
+								[]string{
+									"Introduced Golang for developing CLI tools to streamline multi-technology projects",
+									"Built web version of company's mobile network tracking application using React and Rust",
+									"Developed gRPC-based microservices for efficient communication between internal services",
+									"Integrated with OTLP for real-time telemetry",
+								},
+							)
+							
+							@experienceItem(
+								"Software Engineer",
+								"Beedeez",
+								"Jan 2021 – Jan 2023",
+								"Paris, France",
+								[]string{
+									"Led development of social learning platform with React Native and TypeScript",
+									"Developed Go-based tool to aggregate and manage JSON data",
+									"Built cross-platform mobile and web apps with full backoffice configuration",
+								},
+							)
+							
+							@experienceItem(
+								"Software Developer",
+								"Glintt HS",
+								"Sep 2017 – May 2019",
+								"Porto, Portugal",
+								[]string{
+									"Developed web applications for healthcare sector (pharmacy and patient management)",
+									"Worked on privacy-focused blockchain project with C# and MongoDB",
+									"Created restaurant data management MVP integrated with Google My Business",
+								},
+							)
 						</div>
 					</div>
 				</section>
 
-				<!-- Experience -->
-				<section class="py-16 px-4 bg-background">
-					<div class="container mx-auto max-w-4xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground border-b border-border pb-2">Experience</h2>
-						
-						@experienceItem(
-							"Golang Developer",
-							"iDWELL",
-							"Aug 2024 – Present",
-							"Vienna, Austria (Remote)",
-							[]string{
-								"Starting financial development from ground up creating financial services to onboard clients and implementing CICD",
-								"Developing modular web services for finance sector with Go, Postgres, MSSQL, and GraphQL",
-								"Built scalable, robust APIs that streamline financial data processing",
-								"Collaborated with cross-functional teams to enhance system architecture",
-							},
-						)
-						
-						@experienceItem(
-							"Software Engineer",
-							"GSMK",
-							"Jan 2023 – Aug 2024",
-							"Berlin, Germany",
-							[]string{
-								"Introduced Golang for developing CLI tools to streamline multi-technology projects",
-								"Built web version of company's mobile network tracking application using React and Rust",
-								"Developed gRPC-based microservices for efficient communication between internal services",
-								"Integrated with OTLP for real-time telemetry",
-							},
-						)
-						
-						@experienceItem(
-							"Software Engineer",
-							"Beedeez",
-							"Jan 2021 – Jan 2023",
-							"Paris, France",
-							[]string{
-								"Led development of social learning platform with React Native and TypeScript",
-								"Developed Go-based tool to aggregate and manage JSON data",
-								"Built cross-platform mobile and web apps with full backoffice configuration",
-							},
-						)
-						
-						@experienceItem(
-							"Software Developer",
-							"Glintt HS",
-							"Sep 2017 – May 2019",
-							"Porto, Portugal",
-							[]string{
-								"Developed web applications for healthcare sector (pharmacy and patient management)",
-								"Worked on privacy-focused blockchain project with C# and MongoDB",
-								"Created restaurant data management MVP integrated with Google My Business",
-							},
-						)
-					</div>
-				</section>
-
 				<!-- Education -->
-				<section class="py-16 px-4 bg-muted">
+				<section class="py-16 px-4 bg-muted pattern-dots">
 					<div class="container mx-auto max-w-4xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground border-b border-border pb-2">Education</h2>
+						<h2 class="section-heading text-2xl font-bold mb-10 text-foreground">Education</h2>
 						<div class="grid md:grid-cols-2 gap-6">
 							@educationItem(
 								"M.S. Computer Science",
@@ -106,19 +131,27 @@ templ Curriculum() {
 				<!-- Honors & Awards -->
 				<section class="py-16 px-4 bg-background">
 					<div class="container mx-auto max-w-4xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground border-b border-border pb-2">Honors & Awards</h2>
+						<h2 class="section-heading text-2xl font-bold mb-10 text-foreground">Honors & Awards</h2>
 						<div class="grid md:grid-cols-2 gap-6">
-							<div class="card p-6">
-								<div class="text-3xl mb-3">🏆</div>
-								<h3 class="font-bold text-foreground">Academic Excellence</h3>
-								<p class="text-muted-foreground">Top 5% students from IPCA</p>
-								<p class="text-sm text-muted-foreground">Computer Science | 2017</p>
+							<div class="glass-card p-6 rounded-xl hover-lift">
+								<div class="flex items-start gap-4">
+									<div class="w-12 h-12 rounded-lg bg-amber-500/20 flex items-center justify-center text-2xl flex-shrink-0">🏆</div>
+									<div>
+										<h3 class="font-bold text-foreground">Academic Excellence</h3>
+										<p class="text-muted-foreground">Top 5% students from IPCA</p>
+										<p class="text-sm text-muted-foreground mt-1">Computer Science | 2017</p>
+									</div>
+								</div>
 							</div>
-							<div class="card p-6">
-								<div class="text-3xl mb-3">📜</div>
-								<h3 class="font-bold text-foreground">Dean's List</h3>
-								<p class="text-muted-foreground">Top 10% students in the program</p>
-								<p class="text-sm text-muted-foreground">IPCA | 2016</p>
+							<div class="glass-card p-6 rounded-xl hover-lift">
+								<div class="flex items-start gap-4">
+									<div class="w-12 h-12 rounded-lg bg-amber-500/20 flex items-center justify-center text-2xl flex-shrink-0">📜</div>
+									<div>
+										<h3 class="font-bold text-foreground">Dean's List</h3>
+										<p class="text-muted-foreground">Top 10% students in the program</p>
+										<p class="text-sm text-muted-foreground mt-1">IPCA | 2016</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -127,15 +160,15 @@ templ Curriculum() {
 				<!-- Coursework -->
 				<section class="py-16 px-4 bg-muted">
 					<div class="container mx-auto max-w-4xl">
-						<h2 class="text-2xl font-bold mb-8 text-foreground border-b border-border pb-2">Coursework</h2>
+						<h2 class="section-heading text-2xl font-bold mb-8 text-foreground">Relevant Coursework</h2>
 						<div class="flex flex-wrap gap-3">
-							<span class="badge badge-lg">Distributed Systems and Microservices</span>
-							<span class="badge badge-lg">Cloud Computing and DevOps</span>
-							<span class="badge badge-lg">Database Design and Management</span>
-							<span class="badge badge-lg">Software Engineering Principles</span>
-							<span class="badge badge-lg">API Design and Development</span>
-							<span class="badge badge-lg">Data Structures and Algorithms</span>
-							<span class="badge badge-lg">Web Development Technologies</span>
+							<span class="badge badge-lg glass-card hover-lift">Distributed Systems and Microservices</span>
+							<span class="badge badge-lg glass-card hover-lift">Cloud Computing and DevOps</span>
+							<span class="badge badge-lg glass-card hover-lift">Database Design and Management</span>
+							<span class="badge badge-lg glass-card hover-lift">Software Engineering Principles</span>
+							<span class="badge badge-lg glass-card hover-lift">API Design and Development</span>
+							<span class="badge badge-lg glass-card hover-lift">Data Structures and Algorithms</span>
+							<span class="badge badge-lg glass-card hover-lift">Web Development Technologies</span>
 						</div>
 					</div>
 				</section>
@@ -146,30 +179,40 @@ templ Curriculum() {
 }
 
 templ experienceItem(title string, company string, period string, location string, bullets []string) {
-	<div class="mb-8 last:mb-0">
-		<div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-			<div>
-				<h3 class="text-xl font-bold text-foreground">{ title }</h3>
-				<p class="text-primary font-medium">{ company }</p>
+	<div class="timeline-item animate-fade-in-up">
+		<div class="glass-card p-6 rounded-xl ml-4">
+			<div class="flex flex-col md:flex-row md:items-start md:justify-between mb-3">
+				<div>
+					<h3 class="text-xl font-bold text-foreground">{ title }</h3>
+					<p class="text-primary font-medium">{ company }</p>
+				</div>
+				<div class="text-muted-foreground text-sm md:text-right mt-2 md:mt-0">
+					<p class="font-medium">{ period }</p>
+					<p>{ location }</p>
+				</div>
 			</div>
-			<div class="text-muted-foreground text-sm md:text-right">
-				<p>{ period }</p>
-				<p>{ location }</p>
-			</div>
+			<ul class="space-y-2 text-muted-foreground">
+				for _, bullet := range bullets {
+					<li class="flex items-start gap-2">
+						<span class="text-primary mt-1.5 flex-shrink-0">•</span>
+						<span>{ bullet }</span>
+					</li>
+				}
+			</ul>
 		</div>
-		<ul class="list-disc list-inside space-y-1 text-muted-foreground">
-			for _, bullet := range bullets {
-				<li>{ bullet }</li>
-			}
-		</ul>
 	</div>
 }
 
 templ educationItem(degree string, school string, date string, location string, gpa string) {
-	<div class="card p-6">
-		<h3 class="font-bold text-foreground text-lg">{ degree }</h3>
-		<p class="text-primary">{ school }</p>
-		<p class="text-muted-foreground text-sm">{ date } | { location }</p>
-		<p class="text-sm font-medium text-foreground mt-2">{ gpa }</p>
+	<div class="glass-card p-6 rounded-xl hover-lift">
+		<div class="flex items-start gap-4">
+			<div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center text-2xl flex-shrink-0">🎓</div>
+			<div>
+				<h3 class="font-bold text-foreground text-lg">{ degree }</h3>
+				<p class="text-primary">{ school }</p>
+				<p class="text-muted-foreground text-sm">{ date } | { location }</p>
+				<p class="text-sm font-medium text-foreground mt-2">{ gpa }</p>
+			</div>
+		</div>
 	</div>
 }

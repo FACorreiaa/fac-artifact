@@ -9,20 +9,57 @@ templ Blog() {
 			@components.Navbar("blog")
 			<main class="flex-1">
 				<!-- Hero Section -->
-				<section class="min-h-[60vh] bg-gradient-to-br from-primary/10 via-background to-accent/10 flex items-center justify-center">
+				<section class="hero-gradient min-h-[70vh] flex items-center justify-center">
 					<div class="text-center px-4">
 						<div class="max-w-2xl mx-auto">
-							<div class="text-6xl mb-6">📝</div>
-							<h1 class="text-4xl font-bold mb-4 text-foreground">Blog</h1>
-							<p class="text-xl text-muted-foreground mb-8">
-								Coming soon! I'll be sharing thoughts on software engineering,
-								Go development, and lessons learned building scalable systems.
+							<!-- Animated Icon -->
+							<div class="relative w-24 h-24 mx-auto mb-8 animate-fade-in">
+								<div class="absolute inset-0 rounded-2xl bg-primary/20 animate-pulse"></div>
+								<div class="relative w-full h-full rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+									<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground">
+										<path d="M12 19l7-7 3 3-7 7-3-3z"/>
+										<path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+										<path d="M2 2l7.586 7.586"/>
+										<circle cx="11" cy="11" r="2"/>
+									</svg>
+								</div>
+							</div>
+							
+							<span class="category-label block mb-4 animate-fade-in-up delay-100">Coming Soon</span>
+							<h1 class="text-4xl md:text-5xl font-bold mb-6 text-foreground animate-fade-in-up delay-200">
+								The <span class="text-gradient">Blog</span> is Brewing
+							</h1>
+							<p class="text-xl text-muted-foreground mb-8 animate-fade-in-up delay-300">
+								I'll be sharing thoughts on software engineering, Go development, 
+								distributed systems, and lessons learned building scalable applications.
 							</p>
-							<div class="card p-6 max-w-md mx-auto">
-								<p class="text-foreground mb-4">Want to be notified when I publish?</p>
-								<a href="mailto:fernandocorreia316@gmail.com" class="btn btn-primary">
-									Get in Touch
+							
+							<!-- Coming Soon Card -->
+							<div class="glass-card p-8 max-w-md mx-auto rounded-2xl animate-fade-in-up delay-400">
+								<div class="text-4xl mb-4">✨</div>
+								<h2 class="text-xl font-bold text-foreground mb-3">Stay Tuned</h2>
+								<p class="text-muted-foreground mb-6">
+									Want to know when articles drop? Get in touch and I'll let you know.
+								</p>
+								<a href="mailto:fernandocorreia316@gmail.com?subject=Blog%20Updates" class="btn btn-primary btn-glow w-full">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+										<rect width="20" height="16" x="2" y="4" rx="2"></rect>
+										<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+									</svg>
+									Notify Me
 								</a>
+							</div>
+							
+							<!-- Topics Preview -->
+							<div class="mt-12 animate-fade-in-up delay-500">
+								<p class="text-sm text-muted-foreground mb-4">Topics I'll be covering:</p>
+								<div class="flex flex-wrap justify-center gap-3">
+									<span class="badge badge-outline">Go & Backend</span>
+									<span class="badge badge-outline">React & Mobile</span>
+									<span class="badge badge-outline">System Design</span>
+									<span class="badge badge-outline">Career Insights</span>
+									<span class="badge badge-outline">DevOps</span>
+								</div>
 							</div>
 						</div>
 					</div>
