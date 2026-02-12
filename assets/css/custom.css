@@ -82,14 +82,6 @@ body {
     font-family: var(--font-body);
     color: var(--foreground);
     background-color: var(--background);
-    background-image:
-        radial-gradient(80rem 40rem at 90% -8%,
-            rgba(79, 70, 229, 0.08),
-            transparent 55%),
-        radial-gradient(65rem 35rem at 5% 105%,
-            rgba(6, 182, 212, 0.07),
-            transparent 55%);
-    background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -131,105 +123,6 @@ li {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-}
-
-.hero-gradient::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -3;
-    background:
-        radial-gradient(65% 70% at 10% 20%,
-            rgba(79, 70, 229, 0.18),
-            transparent 68%),
-        radial-gradient(50% 65% at 88% 12%,
-            rgba(6, 182, 212, 0.15),
-            transparent 65%),
-        radial-gradient(60% 70% at 50% 95%,
-            rgba(245, 158, 11, 0.1),
-            transparent 70%);
-    animation: meshShift 16s ease-in-out infinite alternate;
-}
-
-/* Floating orb 1 */
-.hero-gradient::after {
-    content: '';
-    position: absolute;
-    z-index: -2;
-    width: 28rem;
-    height: 28rem;
-    border-radius: 50%;
-    top: -6rem;
-    right: -8rem;
-    background: radial-gradient(circle,
-            rgba(79, 70, 229, 0.12) 0%,
-            transparent 70%);
-    animation: floatOrb 12s ease-in-out infinite alternate;
-    filter: blur(40px);
-}
-
-.hero-gradient>* {
-    position: relative;
-    z-index: 1;
-}
-
-@keyframes meshShift {
-    0% {
-        transform: translate3d(0, 0, 0) scale(1);
-    }
-
-    50% {
-        transform: translate3d(1.5%, -1.5%, 0) scale(1.03);
-    }
-
-    100% {
-        transform: translate3d(-1%, 1%, 0) scale(0.98);
-    }
-}
-
-@keyframes floatOrb {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.7;
-    }
-
-    50% {
-        transform: translate(-40px, 30px) scale(1.15);
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: translate(20px, -20px) scale(0.95);
-        opacity: 0.8;
-    }
-}
-
-/* Floating particles — CSS-only ambient dots */
-@keyframes floatParticle {
-
-    0%,
-    100% {
-        transform: translateY(0) translateX(0);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 0.5;
-    }
-
-    50% {
-        transform: translateY(-120px) translateX(30px);
-        opacity: 0.3;
-    }
-
-    90% {
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: translateY(-240px) translateX(-20px);
-        opacity: 0;
-    }
 }
 
 /* ================================================================
@@ -299,38 +192,12 @@ li {
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Shimmer effect on hover */
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%) rotate(15deg);
-    }
-
-    100% {
-        transform: translateX(200%) rotate(15deg);
-    }
-}
-
-.glass-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: inherit;
-    background: linear-gradient(105deg,
-            transparent 40%,
-            rgba(255, 255, 255, 0.08) 45%,
-            rgba(255, 255, 255, 0.15) 50%,
-            rgba(255, 255, 255, 0.08) 55%,
-            transparent 60%);
-    transform: translateX(-100%) rotate(15deg);
-    pointer-events: none;
-    z-index: 2;
-}
-
+/* Disable glass-card shimmer hover overlay (diagonal streak effect) */
+.glass-card::after,
 .glass-card:hover::after {
-    animation: shimmer 0.8s ease-out forwards;
+    content: none !important;
+    display: none !important;
+    animation: none !important;
 }
 
 /* ================================================================
