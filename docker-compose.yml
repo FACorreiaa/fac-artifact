@@ -30,9 +30,6 @@ services:
   #   networks:
   #     - app-network
 
-volumes:
-
-  # redis_data:
 
 networks:
   app-network:
