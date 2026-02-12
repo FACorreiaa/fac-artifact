@@ -4,7 +4,7 @@
 FROM golang:1.23-alpine AS builder
 
 # Install build dependencies
-RUN apk add --no-cache git curl bash
+RUN apk add --no-cache git curl libstdc++ libgcc
 
 WORKDIR /app
 
@@ -18,23 +18,28 @@ RUN go mod download
 # Copy source code
 COPY . .
 
-# Install CSS Framework & Assets
-RUN cd assets && curl -sL daisyui.com/fast | bash
-RUN mkdir -p assets/css assets/js && \
-    mv assets/tailwindcss .
-RUN curl -sL -o assets/css/basecoat.min.css https://cdn.jsdelivr.net/npm/basecoat-css@latest/dist/basecoat.min.css
-RUN echo '@import "tailwindcss"; @import "./basecoat.min.css";' > assets/css/index.css
-RUN rm assets/input.css assets/output.css assets/daisyui* 2>/dev/null || true
-# Download JS
-RUN curl -sL -o assets/js/htmx.min.js https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js && \
-    curl -sL -o assets/js/hyperscript.min.js https://unpkg.com/hyperscript.org@0.9.14 && \
-    curl -sL -o assets/js/basecoat.min.js https://cdn.jsdelivr.net/npm/basecoat-css@latest/dist/basecoat.min.js
+# Install Tailwind CSS standalone binary (musl-compatible for Alpine)
+ARG TAILWIND_VERSION=v4.1.18
+ARG TARGETARCH
+RUN set -eux; \
+    ARCH="${TARGETARCH:-$(apk --print-arch)}"; \
+    case "${ARCH}" in \
+    amd64|x86_64) TW_ARCH="x64" ;; \
+    arm64|aarch64) TW_ARCH="arm64" ;; \
+    *) echo "Unsupported architecture: ${ARCH}" >&2; exit 1 ;; \
+    esac; \
+    TW_MUSL_URL="https://github.com/tailwindlabs/tailwindcss/releases/download/${TAILWIND_VERSION}/tailwindcss-linux-${TW_ARCH}-musl"; \
+    TW_GLIBC_URL="https://github.com/tailwindlabs/tailwindcss/releases/download/${TAILWIND_VERSION}/tailwindcss-linux-${TW_ARCH}"; \
+    if ! curl -fsSL "${TW_MUSL_URL}" -o /usr/local/bin/tailwindcss; then \
+    curl -fsSL "${TW_GLIBC_URL}" -o /usr/local/bin/tailwindcss; \
+    fi; \
+    chmod +x /usr/local/bin/tailwindcss
 
 # Generate Templ templates
 RUN templ generate
 
 # Build CSS for production
-RUN ./tailwindcss -i assets/css/index.css -o assets/css/output.css --minify
+RUN tailwindcss -i assets/css/index.css -o assets/css/output.css --minify
 
 # Build the binary
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/server ./cmd/server
